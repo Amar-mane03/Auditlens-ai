@@ -1,0 +1,957 @@
+<!DOCTYPE html>
+
+<html class="h-full" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>RevAI Revenue Assurance - Overview Command Center</title>
+<!-- Typography: IBM Plex Sans & Inter -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&amp;family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<!-- Material Symbols Outlined -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          "colors": {
+            "secondary-fixed-dim": "#b4c5ff",
+            "on-secondary-container": "#fefcff",
+            "surface-container-lowest": "#ffffff",
+            "on-tertiary-fixed-variant": "#5a00c6",
+            "outline-variant": "#c6c6cd",
+            "surface-container-low": "#eff4ff",
+            "surface-container": "#e5eeff",
+            "surface-bright": "#f8f9ff",
+            "on-tertiary": "#ffffff",
+            "tertiary-fixed": "#eaddff",
+            "tertiary-container": "#25005a",
+            "error": "#ba1a1a",
+            "secondary-container": "#316bf3",
+            "on-surface": "#0b1c30",
+            "surface-dim": "#cbdbf5",
+            "on-error": "#ffffff",
+            "on-primary-fixed": "#131b2e",
+            "on-tertiary-fixed": "#25005a",
+            "on-tertiary-container": "#9863ff",
+            "inverse-surface": "#213145",
+            "outline": "#76777d",
+            "tertiary": "#000000",
+            "secondary": "#0051d5",
+            "inverse-on-surface": "#eaf1ff",
+            "on-primary": "#ffffff",
+            "background": "#f8f9ff",
+            "on-secondary": "#ffffff",
+            "surface-tint": "#565e74",
+            "inverse-primary": "#bec6e0",
+            "on-primary-container": "#7c839b",
+            "secondary-fixed": "#dbe1ff",
+            "tertiary-fixed-dim": "#d2bbff",
+            "on-primary-fixed-variant": "#3f465c",
+            "primary-container": "#131b2e",
+            "surface-container-highest": "#d3e4fe",
+            "on-background": "#0b1c30",
+            "on-error-container": "#93000a",
+            "primary-fixed-dim": "#bec6e0",
+            "error-container": "#ffdad6",
+            "primary": "#000000",
+            "on-secondary-fixed": "#00174b",
+            "on-surface-variant": "#45464d",
+            "primary-fixed": "#dae2fd",
+            "surface-container-high": "#dce9ff",
+            "surface": "#f8f9ff",
+            "surface-variant": "#d3e4fe",
+            "on-secondary-fixed-variant": "#003ea8"
+          },
+          "borderRadius": {
+            "DEFAULT": "0.125rem",
+            "lg": "0.25rem",
+            "xl": "0.5rem",
+            "full": "0.75rem"
+          },
+          "spacing": {
+            "space-lg": "1rem",
+            "gutter": "1rem",
+            "space-xl": "1.5rem",
+            "space-2xl": "2rem",
+            "space-xxs": "0.125rem",
+            "margin": "1.5rem",
+            "space-sm": "0.5rem",
+            "space-xs": "0.25rem",
+            "space-md": "0.75rem"
+          },
+          "fontFamily": {
+            "headline-lg": ["IBM Plex Sans", "sans-serif"],
+            "headline-xl": ["IBM Plex Sans", "sans-serif"],
+            "body-sm": ["Inter", "sans-serif"],
+            "data-mono-sm": ["IBM Plex Sans", "monospace"],
+            "body-lg": ["Inter", "sans-serif"],
+            "body-md": ["Inter", "sans-serif"],
+            "data-mono-md": ["IBM Plex Sans", "monospace"],
+            "data-mono-lg": ["IBM Plex Sans", "monospace"],
+            "headline-sm": ["IBM Plex Sans", "sans-serif"],
+            "headline-md": ["IBM Plex Sans", "sans-serif"],
+            "label-md": ["IBM Plex Sans", "sans-serif"],
+            "label-sm": ["IBM Plex Sans", "sans-serif"]
+          },
+          "fontSize": {
+            "headline-lg": ["24px", { "lineHeight": "32px", "letterSpacing": "-0.015em", "fontWeight": "600" }],
+            "headline-xl": ["32px", { "lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "600" }],
+            "body-sm": ["12px", { "lineHeight": "16px", "letterSpacing": "0em", "fontWeight": "400" }],
+            "data-mono-sm": ["11px", { "lineHeight": "14px", "letterSpacing": "0.01em", "fontWeight": "500" }],
+            "body-lg": ["15px", { "lineHeight": "22px", "letterSpacing": "-0.005em", "fontWeight": "400" }],
+            "body-md": ["13px", { "lineHeight": "18px", "letterSpacing": "0em", "fontWeight": "400" }],
+            "data-mono-md": ["13px", { "lineHeight": "18px", "letterSpacing": "0em", "fontWeight": "500" }],
+            "data-mono-lg": ["18px", { "lineHeight": "24px", "letterSpacing": "-0.01em", "fontWeight": "600" }],
+            "headline-sm": ["16px", { "lineHeight": "24px", "letterSpacing": "-0.005em", "fontWeight": "600" }],
+            "headline-md": ["20px", { "lineHeight": "28px", "letterSpacing": "-0.01em", "fontWeight": "600" }],
+            "label-md": ["12px", { "lineHeight": "16px", "letterSpacing": "0.02em", "fontWeight": "600" }],
+            "label-sm": ["11px", { "lineHeight": "14px", "letterSpacing": "0.04em", "fontWeight": "600" }]
+          }
+        }
+      }
+    }
+  </script>
+</head>
+<body class="bg-background text-on-surface antialiased font-body-md h-full overflow-hidden flex">
+<!-- ============================================================== -->
+<!-- 1. PERSISTENT SIDE NAVIGATION (Based on SideNavBar Blueprint) -->
+<!-- ============================================================== -->
+<aside class="fixed top-0 left-0 h-screen w-64 z-50 flex flex-col justify-between py-space-md px-space-xs border-r border-outline-variant bg-surface-container-lowest select-none">
+<!-- Top Identity Area -->
+<div class="px-space-sm pb-space-md border-b border-outline-variant flex flex-col gap-1">
+<div class="flex items-center gap-space-sm">
+<div class="w-7 h-7 rounded bg-primary-container text-inverse-on-surface flex items-center justify-center font-headline-sm text-headline-sm font-bold border border-outline shadow-sm">
+<span class="material-symbols-outlined text-secondary text-[18px]" data-icon="shield">shield</span>
+</div>
+<div class="flex flex-col">
+<span class="font-headline-sm text-headline-sm font-semibold text-on-surface tracking-tight leading-tight">RevAI</span>
+<span class="font-label-sm text-label-sm text-outline font-medium tracking-tight">Revenue Assurance</span>
+</div>
+</div>
+<div class="flex items-center gap-1.5 mt-2 bg-surface-container px-2 py-1 rounded border border-outline-variant">
+<span class="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span>
+<span class="font-label-sm text-label-sm text-on-surface-variant">Active · Self-learning v4.2.1</span>
+</div>
+</div>
+<!-- Navigation Scrollable Area -->
+<div class="flex-1 overflow-y-auto pr-1 py-space-sm space-y-3 scrollbar-thin">
+<!-- Section: Main Analytical Ledger -->
+<div>
+<div class="px-space-sm py-1 font-label-sm text-label-sm text-outline font-semibold tracking-wider uppercase">Executive &amp; Core</div>
+<nav class="space-y-0.5 mt-1">
+<!-- Active: Overview -->
+<a class="flex items-center gap-2.5 px-space-sm py-1.5 rounded bg-surface-container-high text-secondary border-l-2 border-secondary font-semibold font-label-md text-label-md transition-colors" href="#">
+<span class="material-symbols-outlined text-[18px]" data-icon="dashboard">dashboard</span>
+<span>Overview</span>
+</a>
+<a class="flex items-center gap-2.5 px-space-sm py-1.5 rounded text-on-surface-variant font-normal hover:bg-surface-container-low hover:text-on-surface font-label-md text-label-md transition-colors" href="#">
+<span class="material-symbols-outlined text-[18px]" data-icon="bubble_chart">bubble_chart</span>
+<span>Revenue Risk Graph</span>
+</a>
+<a class="flex items-center gap-2.5 px-space-sm py-1.5 rounded text-on-surface-variant font-normal hover:bg-surface-container-low hover:text-on-surface font-label-md text-label-md transition-colors" href="#">
+<span class="material-symbols-outlined text-[18px]" data-icon="radar">radar</span>
+<span>Revenue Leak Radar</span>
+</a>
+<a class="flex items-center gap-2.5 px-space-sm py-1.5 rounded text-on-surface-variant font-normal hover:bg-surface-container-low hover:text-on-surface font-label-md text-label-md transition-colors" href="#">
+<span class="material-symbols-outlined text-[18px]" data-icon="receipt_long">receipt_long</span>
+<span>Transactions</span>
+</a>
+<a class="flex items-center gap-2.5 px-space-sm py-1.5 rounded text-on-surface-variant font-normal hover:bg-surface-container-low hover:text-on-surface font-label-md text-label-md transition-colors" href="#">
+<span class="material-symbols-outlined text-[18px]" data-icon="fingerprint">fingerprint</span>
+<span>Transaction DNA</span>
+</a>
+<a class="flex items-center gap-2.5 px-space-sm py-1.5 rounded text-on-surface-variant font-normal hover:bg-surface-container-low hover:text-on-surface font-label-md text-label-md transition-colors" href="#">
+<span class="material-symbols-outlined text-[18px]" data-icon="timeline">timeline</span>
+<span>Revenue Timeline</span>
+</a>
+</nav>
+</div>
+<!-- Section: Audit Intelligence -->
+<div>
+<div class="px-space-sm py-1 font-label-sm text-label-sm text-outline font-semibold tracking-wider uppercase">Audit Intelligence</div>
+<nav class="space-y-0.5 mt-1">
+<a class="flex items-center justify-between px-space-sm py-1.5 rounded text-on-surface-variant font-normal hover:bg-surface-container-low hover:text-on-surface font-label-md text-label-md transition-colors" href="#">
+<div class="flex items-center gap-2.5">
+<span class="material-symbols-outlined text-[18px]" data-icon="link">link</span>
+<span>AI Evidence Chain</span>
+</div>
+<span class="font-data-mono-sm text-data-mono-sm px-1.5 py-0.2 bg-secondary-fixed text-on-secondary-fixed rounded">94.8%</span>
+</a>
+<a class="flex items-center justify-between px-space-sm py-1.5 rounded text-on-surface-variant font-normal hover:bg-surface-container-low hover:text-on-surface font-label-md text-label-md transition-colors" href="#">
+<div class="flex items-center gap-2.5">
+<span class="material-symbols-outlined text-[18px]" data-icon="assignment">assignment</span>
+<span>Audit Cases</span>
+</div>
+<span class="font-data-mono-sm text-data-mono-sm px-1.5 py-0.2 bg-error-container text-on-error-container font-semibold rounded">137</span>
+</a>
+<a class="flex items-center gap-2.5 px-space-sm py-1.5 rounded text-on-surface-variant font-normal hover:bg-surface-container-low hover:text-on-surface font-label-md text-label-md transition-colors" href="#">
+<span class="material-symbols-outlined text-[18px]" data-icon="shield">shield</span>
+<span>Controls</span>
+</a>
+<a class="flex items-center gap-2.5 px-space-sm py-1.5 rounded text-on-surface-variant font-normal hover:bg-surface-container-low hover:text-on-surface font-label-md text-label-md transition-colors" href="#">
+<span class="material-symbols-outlined text-[18px]" data-icon="fact_check">fact_check</span>
+<span>Findings</span>
+</a>
+<a class="flex items-center gap-2.5 px-space-sm py-1.5 rounded text-on-surface-variant font-normal hover:bg-surface-container-low hover:text-on-surface font-label-md text-label-md transition-colors" href="#">
+<span class="material-symbols-outlined text-[18px]" data-icon="inventory_2">inventory_2</span>
+<span>Evidence Vault</span>
+</a>
+</nav>
+</div>
+<!-- Section: AI Engine Diagnostics -->
+<div>
+<div class="px-space-sm py-1 font-label-sm text-label-sm text-outline font-semibold tracking-wider uppercase">Autonomous AI</div>
+<nav class="space-y-0.5 mt-1">
+<a class="flex items-center gap-2.5 px-space-sm py-1.5 rounded text-on-surface-variant font-normal hover:bg-surface-container-low hover:text-on-surface font-label-md text-label-md transition-colors" href="#">
+<span class="material-symbols-outlined text-[18px] text-secondary" data-icon="auto_awesome">auto_awesome</span>
+<span>AI Insights</span>
+</a>
+<a class="flex items-center gap-2.5 px-space-sm py-1.5 rounded text-on-surface-variant font-normal hover:bg-surface-container-low hover:text-on-surface font-label-md text-label-md transition-colors" href="#">
+<span class="material-symbols-outlined text-[18px]" data-icon="psychology">psychology</span>
+<span>Model Intelligence</span>
+</a>
+<a class="flex items-center gap-2.5 px-space-sm py-1.5 rounded text-on-surface-variant font-normal hover:bg-surface-container-low hover:text-on-surface font-label-md text-label-md transition-colors" href="#">
+<span class="material-symbols-outlined text-[18px]" data-icon="neurology">neurology</span>
+<span>Self-Learning Feedback</span>
+</a>
+<a class="flex items-center gap-2.5 px-space-sm py-1.5 rounded text-on-surface-variant font-normal hover:bg-surface-container-low hover:text-on-surface font-label-md text-label-md transition-colors" href="#">
+<span class="material-symbols-outlined text-[18px]" data-icon="history">history</span>
+<span>AI Activity</span>
+</a>
+</nav>
+</div>
+<!-- Section: Regulatory & Reporting -->
+<div>
+<div class="px-space-sm py-1 font-label-sm text-label-sm text-outline font-semibold tracking-wider uppercase">Reporting &amp; System</div>
+<nav class="space-y-0.5 mt-1">
+<a class="flex items-center gap-2.5 px-space-sm py-1.5 rounded text-on-surface-variant font-normal hover:bg-surface-container-low hover:text-on-surface font-label-md text-label-md transition-colors" href="#">
+<span class="material-symbols-outlined text-[18px]" data-icon="summarize">summarize</span>
+<span>Audit Reports</span>
+</a>
+<a class="flex items-center gap-2.5 px-space-sm py-1.5 rounded text-on-surface-variant font-normal hover:bg-surface-container-low hover:text-on-surface font-label-md text-label-md transition-colors" href="#">
+<span class="material-symbols-outlined text-[18px]" data-icon="analytics">analytics</span>
+<span>Revenue Reports</span>
+</a>
+<a class="flex items-center gap-2.5 px-space-sm py-1.5 rounded text-on-surface-variant font-normal hover:bg-surface-container-low hover:text-on-surface font-label-md text-label-md transition-colors" href="#">
+<span class="material-symbols-outlined text-[18px]" data-icon="published_with_changes">published_with_changes</span>
+<span>Recovery Reports</span>
+</a>
+<a class="flex items-center gap-2.5 px-space-sm py-1.5 rounded text-on-surface-variant font-normal hover:bg-surface-container-low hover:text-on-surface font-label-md text-label-md transition-colors" href="#">
+<span class="material-symbols-outlined text-[18px]" data-icon="file_download">file_download</span>
+<span>Export Center</span>
+</a>
+<a class="flex items-center gap-2.5 px-space-sm py-1.5 rounded text-on-surface-variant font-normal hover:bg-surface-container-low hover:text-on-surface font-label-md text-label-md transition-colors" href="#">
+<span class="material-symbols-outlined text-[18px]" data-icon="database">database</span>
+<span>Data Sources</span>
+</a>
+<a class="flex items-center gap-2.5 px-space-sm py-1.5 rounded text-on-surface-variant font-normal hover:bg-surface-container-low hover:text-on-surface font-label-md text-label-md transition-colors" href="#">
+<span class="material-symbols-outlined text-[18px]" data-icon="rule">rule</span>
+<span>Rules &amp; Controls</span>
+</a>
+<a class="flex items-center gap-2.5 px-space-sm py-1.5 rounded text-on-surface-variant font-normal hover:bg-surface-container-low hover:text-on-surface font-label-md text-label-md transition-colors" href="#">
+<span class="material-symbols-outlined text-[18px]" data-icon="settings">settings</span>
+<span>Settings</span>
+</a>
+</nav>
+</div>
+</div>
+<!-- Persistent Bottom Anchor & Enterprise Health -->
+<div class="pt-space-sm border-t border-outline-variant space-y-2">
+<!-- Live Sync Monitor Pill -->
+<div class="p-2 rounded bg-surface-container-low border border-outline-variant flex flex-col gap-1">
+<div class="flex items-center justify-between text-on-surface font-label-sm text-label-sm font-semibold">
+<span class="flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px] text-secondary" data-icon="corporate_fare">corporate_fare</span>
+            Enterprise Global Corp
+          </span>
+<span class="material-symbols-outlined text-[14px] text-outline cursor-pointer hover:text-on-surface" data-icon="sync_alt">sync_alt</span>
+</div>
+<div class="flex items-center gap-1.5 text-on-surface-variant font-data-mono-sm text-data-mono-sm">
+<span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span>
+<span>SAP S/4HANA &amp; SFDC synced 2m ago</span>
+</div>
+</div>
+<!-- Quick Trigger CTA -->
+<button class="w-full h-8 flex items-center justify-center gap-2 px-space-sm rounded bg-primary text-on-primary hover:bg-on-surface active:scale-[0.99] font-label-sm text-label-sm transition-all shadow-sm">
+<span class="material-symbols-outlined text-[15px]" data-icon="sync">sync</span>
+<span>Run Live Reconciliation</span>
+</button>
+</div>
+</aside>
+<!-- ============================================================== -->
+<!-- 2. MAIN WORKSPACE CANVAS WITH TOP NAV & COMMAND HEADER         -->
+<!-- ============================================================== -->
+<div class="ml-64 flex-1 flex flex-col h-screen overflow-hidden bg-background">
+<!-- TopNavBar (Shared Component Specification) -->
+<header class="flex justify-between items-center h-14 w-full px-space-lg bg-surface-container-lowest border-b border-outline-variant z-40 shrink-0">
+<!-- Search Bar & Breadcrumbs -->
+<div class="flex items-center gap-space-lg flex-1 max-w-2xl">
+<div class="flex items-center gap-1 text-on-surface-variant font-label-sm text-label-sm">
+<span class="font-semibold text-primary">RevAI</span>
+<span class="text-outline">/</span>
+<span>Command Center</span>
+<span class="text-outline">/</span>
+<span class="text-on-surface font-semibold">Overview</span>
+</div>
+<!-- Search Input -->
+<div class="relative flex-1 max-w-md">
+<span class="material-symbols-outlined absolute left-2.5 top-2 text-[16px] text-outline" data-icon="search">search</span>
+<input class="w-full h-8 pl-8 pr-12 text-on-surface bg-background border border-outline-variant rounded focus:outline-none focus:border-secondary focus:ring-1 focus:ring-secondary font-body-sm text-body-sm" placeholder="Search transactions, customers, invoices, findings (⌘K)..." type="text"/>
+<div class="absolute right-2 top-1.5 px-1 py-0.5 rounded bg-surface-container border border-outline-variant text-[10px] text-outline font-data-mono-sm">⌘K</div>
+</div>
+</div>
+<!-- Trailing Controls & Copilot Action -->
+<div class="flex items-center gap-space-md">
+<!-- Audit Period Pill -->
+<div class="flex items-center gap-1.5 px-2.5 py-1 rounded bg-surface-container-low border border-outline-variant text-on-surface font-data-mono-sm text-data-mono-sm">
+<span class="material-symbols-outlined text-[15px] text-outline" data-icon="calendar_month">calendar_month</span>
+<span class="font-semibold">Q3 FY2026</span>
+<span class="text-outline">/</span>
+<span class="text-on-surface-variant">01 Jul - 30 Sep</span>
+</div>
+<!-- Notification Trigger -->
+<button class="relative p-1.5 rounded text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors" title="Notifications">
+<span class="material-symbols-outlined text-[20px]" data-icon="notifications">notifications</span>
+<span class="absolute top-1 right-1 w-2 h-2 rounded-full bg-error ring-2 ring-surface-container-lowest"></span>
+</button>
+<button class="p-1.5 rounded text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors" title="Help &amp; Defensibility Documentation">
+<span class="material-symbols-outlined text-[20px]" data-icon="help">help</span>
+</button>
+<button class="p-1.5 rounded text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors" title="Trigger Synchronizer">
+<span class="material-symbols-outlined text-[20px]" data-icon="sync">sync</span>
+</button>
+<!-- Ask RevAI Copilot CTA -->
+<button class="h-8 flex items-center gap-1.5 px-3 rounded bg-secondary text-on-secondary hover:bg-secondary-container active:scale-[0.98] font-label-sm text-label-sm font-semibold transition-all shadow-sm">
+<span class="material-symbols-outlined text-[16px]" data-icon="auto_awesome">auto_awesome</span>
+<span>Ask RevAI</span>
+</button>
+<!-- Chief Auditor Avatar -->
+<div class="w-8 h-8 rounded border border-outline-variant overflow-hidden cursor-pointer" title="Chief Revenue Auditor Profile">
+<div class="w-full h-full bg-primary-container text-inverse-on-surface flex items-center justify-center font-headline-sm text-headline-sm font-bold text-xs">
+            CA
+          </div>
+</div>
+</div>
+</header>
+<!-- Scrollable Workspace Body -->
+<main class="flex-1 overflow-y-auto p-space-lg space-y-space-md">
+<!-- Workspace Sub-Header & Executive Actions -->
+<div class="flex flex-col md:flex-row md:items-center justify-between gap-4 pb-2 border-b border-outline-variant">
+<div>
+<h1 class="font-headline-lg text-headline-lg font-bold text-on-surface tracking-tight">Executive Risk Hub &amp; Assurance Ledger</h1>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-0.5">Autonomous AI-powered visibility across enterprise revenue, risk vectors, leakage, and immutable audit evidence.</p>
+</div>
+<div class="flex items-center gap-2">
+<button class="h-8 px-3 rounded bg-surface-container-lowest border border-outline-variant hover:bg-surface-container-low text-on-surface font-label-sm text-label-sm flex items-center gap-1.5 transition-colors">
+<span class="material-symbols-outlined text-[15px] text-outline" data-icon="compare_arrows">compare_arrows</span>
+<span>Compare Period</span>
+</button>
+<button class="h-8 px-3 rounded bg-surface-container-lowest border border-outline-variant hover:bg-surface-container-low text-on-surface font-label-sm text-label-sm flex items-center gap-1.5 transition-colors">
+<span class="material-symbols-outlined text-[15px] text-outline" data-icon="refresh">refresh</span>
+<span>Run Live Reconciliation</span>
+</button>
+<button class="h-8 px-3 rounded bg-primary text-on-primary hover:bg-on-surface font-label-sm text-label-sm flex items-center gap-1.5 shadow-sm transition-colors">
+<span class="material-symbols-outlined text-[15px]" data-icon="file_download">file_download</span>
+<span>Export Audit Package</span>
+</button>
+</div>
+</div>
+<!-- ============================================================== -->
+<!-- 3. SIX CRITICAL METRIC & VARIANCE CARDS                         -->
+<!-- ============================================================== -->
+<section class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-6 gap-space-sm">
+<!-- Card 1: Revenue Monitored -->
+<div class="bg-surface-container-lowest border border-outline-variant rounded p-3 flex flex-col justify-between">
+<div class="flex items-center justify-between">
+<span class="font-label-sm text-label-sm text-outline font-medium">Revenue Monitored</span>
+<span class="material-symbols-outlined text-outline text-[16px]" data-icon="account_balance">account_balance</span>
+</div>
+<div class="mt-2">
+<div class="font-data-mono-lg text-data-mono-lg font-bold text-on-surface">₹248.6 Cr</div>
+<div class="flex items-center gap-1 mt-1 font-data-mono-sm text-data-mono-sm text-emerald-600">
+<span class="material-symbols-outlined text-[13px]" data-icon="trending_up">trending_up</span>
+<span>+8.4%</span>
+<span class="text-outline">vs prev period</span>
+</div>
+</div>
+<div class="mt-2 pt-2 border-t border-outline-variant/50 font-data-mono-sm text-data-mono-sm text-outline">
+            100% ERP Ledger Parity
+          </div>
+</div>
+<!-- Card 2: Revenue at Risk -->
+<div class="bg-surface-container-lowest border border-outline-variant rounded p-3 flex flex-col justify-between relative overflow-hidden">
+<div class="absolute top-0 left-0 w-1 h-full bg-amber-500"></div>
+<div class="flex items-center justify-between pl-1">
+<span class="font-label-sm text-label-sm text-outline font-medium">Revenue at Risk</span>
+<span class="px-1.5 py-0.5 rounded text-[10px] font-semibold bg-amber-50 text-amber-800 border border-amber-300">HIGH RISK</span>
+</div>
+<div class="mt-2 pl-1">
+<div class="font-data-mono-lg text-data-mono-lg font-bold text-on-surface">₹12.4 Cr</div>
+<div class="flex items-center gap-1 mt-1 font-data-mono-sm text-data-mono-sm text-amber-700">
+<span class="font-semibold">5.0%</span>
+<span class="text-outline">of monitored volume</span>
+</div>
+</div>
+<div class="mt-2 pt-2 border-t border-outline-variant/50 pl-1 font-data-mono-sm text-data-mono-sm text-outline">
+            42 open control anomalies
+          </div>
+</div>
+<!-- Card 3: Potential Leakage -->
+<div class="bg-surface-container-lowest border border-outline-variant rounded p-3 flex flex-col justify-between relative overflow-hidden">
+<div class="absolute top-0 left-0 w-1 h-full bg-error"></div>
+<div class="flex items-center justify-between pl-1">
+<span class="font-label-sm text-label-sm text-outline font-medium">Potential Leakage</span>
+<span class="px-1.5 py-0.5 rounded text-[10px] font-semibold bg-red-50 text-red-700 border border-red-200">LEAK ALERT</span>
+</div>
+<div class="mt-2 pl-1">
+<div class="font-data-mono-lg text-data-mono-lg font-bold text-error">₹4.82 Cr</div>
+<div class="flex items-center gap-1 mt-1 font-data-mono-sm text-data-mono-sm text-on-surface-variant">
+<span class="font-bold text-error">₹1.4 Cr</span>
+<span class="text-outline">confirmed</span>
+</div>
+</div>
+<div class="mt-2 pt-2 border-t border-outline-variant/50 pl-1 font-data-mono-sm text-data-mono-sm text-outline">
+            137 active leak vectors
+          </div>
+</div>
+<!-- Card 4: Recoverable Revenue -->
+<div class="bg-surface-container-lowest border border-outline-variant rounded p-3 flex flex-col justify-between">
+<div class="flex items-center justify-between">
+<span class="font-label-sm text-label-sm text-outline font-medium">Recoverable Revenue</span>
+<span class="material-symbols-outlined text-secondary text-[16px]" data-icon="price_check">price_check</span>
+</div>
+<div class="mt-2">
+<div class="font-data-mono-lg text-data-mono-lg font-bold text-secondary">₹2.31 Cr</div>
+<div class="flex items-center gap-1 mt-1 font-data-mono-sm text-data-mono-sm text-emerald-700 font-semibold">
+<span>48%</span>
+<span class="text-outline font-normal">recovery opportunity</span>
+</div>
+</div>
+<div class="mt-2 pt-2 border-t border-outline-variant/50 font-data-mono-sm text-data-mono-sm text-outline">
+            84 actionable workflows
+          </div>
+</div>
+<!-- Card 5: Audit Exceptions -->
+<div class="bg-surface-container-lowest border border-outline-variant rounded p-3 flex flex-col justify-between">
+<div class="flex items-center justify-between">
+<span class="font-label-sm text-label-sm text-outline font-medium">Audit Exceptions</span>
+<span class="material-symbols-outlined text-outline text-[16px]" data-icon="warning">warning</span>
+</div>
+<div class="mt-2">
+<div class="font-data-mono-lg text-data-mono-lg font-bold text-on-surface">284 <span class="font-body-sm text-body-sm font-normal text-outline">Total</span></div>
+<div class="flex items-center gap-1.5 mt-1 font-data-mono-sm text-data-mono-sm">
+<span class="text-red-600 font-bold">32 Crit</span>
+<span class="text-outline">·</span>
+<span class="text-amber-600 font-semibold">94 High</span>
+<span class="text-outline">·</span>
+<span class="text-slate-600">158 Med</span>
+</div>
+</div>
+<div class="mt-2 pt-2 border-t border-outline-variant/50 font-data-mono-sm text-data-mono-sm text-outline">
+            92.4% triage automation
+          </div>
+</div>
+<!-- Card 6: AI Evidence Coverage -->
+<div class="bg-surface-container-lowest border border-outline-variant rounded p-3 flex flex-col justify-between">
+<div class="flex items-center justify-between">
+<span class="font-label-sm text-label-sm text-outline font-medium">AI Evidence Coverage</span>
+<span class="material-symbols-outlined text-secondary text-[16px]" data-icon="verified">verified</span>
+</div>
+<div class="mt-2">
+<div class="font-data-mono-lg text-data-mono-lg font-bold text-on-surface">94.8%</div>
+<div class="flex items-center gap-1 mt-1 font-data-mono-sm text-data-mono-sm text-emerald-600">
+<span class="material-symbols-outlined text-[13px]" data-icon="arrow_upward">arrow_upward</span>
+<span>+6.2%</span>
+<span class="text-outline">coverage index</span>
+</div>
+</div>
+<div class="mt-2 pt-2 border-t border-outline-variant/50 font-data-mono-sm text-data-mono-sm text-secondary flex items-center gap-1">
+<span class="material-symbols-outlined text-[12px]" data-icon="lock">lock</span>
+<span>Cryptographic verified</span>
+</div>
+</div>
+</section>
+<!-- ============================================================== -->
+<!-- 4. CENTRAL EXECUTIVE REVENUE HEALTH PANEL                      -->
+<!-- ============================================================== -->
+<section class="bg-surface-container-lowest border border-outline-variant rounded p-space-md shadow-sm">
+<div class="flex flex-col md:flex-row md:items-center justify-between gap-3 pb-3 border-b border-outline-variant">
+<div>
+<div class="flex items-center gap-2">
+<h2 class="font-headline-sm text-headline-sm font-bold text-on-surface">Central Executive Revenue Health &amp; Exposure Waterfall</h2>
+<span class="px-2 py-0.5 rounded bg-surface-container font-label-sm text-label-sm text-secondary font-semibold">Deterministic ML v4</span>
+</div>
+<p class="font-body-sm text-body-sm text-outline mt-0.5">Continuous automated reconciliation of booked orders, billed invoices, and bank receipts.</p>
+</div>
+<!-- Time Horizon Filters -->
+<div class="flex items-center bg-surface-container rounded p-0.5 border border-outline-variant">
+<button class="px-2.5 py-1 text-on-surface-variant font-label-sm text-label-sm rounded hover:text-on-surface">7D</button>
+<button class="px-2.5 py-1 text-on-surface font-semibold font-label-sm text-label-sm bg-surface-container-lowest rounded shadow-xs">30D</button>
+<button class="px-2.5 py-1 text-on-surface-variant font-label-sm text-label-sm rounded hover:text-on-surface">90D</button>
+<button class="px-2.5 py-1 text-on-surface-variant font-label-sm text-label-sm rounded hover:text-on-surface">YTD</button>
+</div>
+</div>
+<!-- Metric Breakdown Ribbon -->
+<div class="grid grid-cols-2 sm:grid-cols-5 gap-4 py-3 border-b border-outline-variant">
+<div>
+<div class="font-label-sm text-label-sm text-outline">Gross Monitored Base</div>
+<div class="font-data-mono-md text-data-mono-md font-bold text-on-surface mt-0.5">₹248.60 Cr</div>
+<div class="font-data-mono-sm text-data-mono-sm text-outline">100% Ledger Total</div>
+</div>
+<div>
+<div class="font-label-sm text-label-sm text-outline">Identified Revenue at Risk</div>
+<div class="font-data-mono-md text-data-mono-md font-bold text-amber-700 mt-0.5">₹12.40 Cr</div>
+<div class="font-data-mono-sm text-data-mono-sm text-amber-700">4.98% Exposure</div>
+</div>
+<div>
+<div class="font-label-sm text-label-sm text-outline">Confirmed Leakage</div>
+<div class="font-data-mono-md text-data-mono-md font-bold text-error mt-0.5">₹1.40 Cr</div>
+<div class="font-data-mono-sm text-data-mono-sm text-error">Unrecoverable / Disputed</div>
+</div>
+<div>
+<div class="font-label-sm text-label-sm text-outline">Recovered &amp; Repaired</div>
+<div class="font-data-mono-md text-data-mono-md font-bold text-emerald-700 mt-0.5">₹2.31 Cr</div>
+<div class="font-data-mono-sm text-data-mono-sm text-emerald-700">Audit Proven Restored</div>
+</div>
+<div>
+<div class="font-label-sm text-label-sm text-outline">Active Unresolved Exposure</div>
+<div class="font-data-mono-md text-data-mono-md font-bold text-secondary mt-0.5">₹8.69 Cr</div>
+<div class="font-data-mono-sm text-data-mono-sm text-secondary">Triage in Progress</div>
+</div>
+</div>
+<!-- Stacked Analytical Bar Visualization -->
+<div class="mt-4 space-y-2">
+<div class="flex justify-between items-center font-label-sm text-label-sm text-outline">
+<span>Aggregated Portfolio Composition</span>
+<span class="font-data-mono-sm text-data-mono-sm">Audit Reconciled Parity: 99.98%</span>
+</div>
+<!-- The Multi-Segment Bar -->
+<div class="w-full h-7 rounded bg-surface-container overflow-hidden flex border border-outline-variant shadow-inner">
+<div class="bg-primary-container h-full flex items-center px-2 text-inverse-on-surface font-data-mono-sm text-data-mono-sm font-semibold truncate hover:opacity-90 transition-opacity" style="width: 76.5%;" title="Clean Verified Revenue: ₹190.17 Cr (76.5%)">
+              Verified &amp; Clean: ₹190.17 Cr (76.5%)
+            </div>
+<div class="bg-blue-600 h-full flex items-center px-2 text-white font-data-mono-sm text-data-mono-sm font-semibold truncate hover:opacity-90 transition-opacity" style="width: 14.5%;" title="In Flight Reconciliation: ₹36.03 Cr (14.5%)">
+              In-Flight: 14.5%
+            </div>
+<div class="bg-amber-500 h-full flex items-center justify-center text-white font-data-mono-sm text-data-mono-sm font-semibold truncate hover:opacity-90 transition-opacity" style="width: 5.0%;" title="Revenue at Risk: ₹12.4 Cr (5.0%)">
+              Risk: 5.0%
+            </div>
+<div class="bg-error h-full flex items-center justify-center text-white font-data-mono-sm text-data-mono-sm font-semibold truncate hover:opacity-90 transition-opacity" style="width: 3.1%;" title="Confirmed Leakage: ₹1.4 Cr (3.1%)">
+              Leak
+            </div>
+<div class="bg-purple-600 h-full flex items-center justify-center text-white font-data-mono-sm text-data-mono-sm font-semibold truncate hover:opacity-90 transition-opacity" style="width: 0.9%;" title="Disputed Holds">
+</div>
+</div>
+<!-- Color Legends -->
+<div class="flex flex-wrap items-center gap-4 pt-1 font-label-sm text-label-sm text-on-surface-variant">
+<div class="flex items-center gap-1.5">
+<span class="w-2.5 h-2.5 rounded-sm bg-primary-container"></span>
+<span>Clean Settled (76.5%)</span>
+</div>
+<div class="flex items-center gap-1.5">
+<span class="w-2.5 h-2.5 rounded-sm bg-blue-600"></span>
+<span>Reconciling Ledger (14.5%)</span>
+</div>
+<div class="flex items-center gap-1.5">
+<span class="w-2.5 h-2.5 rounded-sm bg-amber-500"></span>
+<span>High Risk Vector (5.0%)</span>
+</div>
+<div class="flex items-center gap-1.5">
+<span class="w-2.5 h-2.5 rounded-sm bg-error"></span>
+<span>Confirmed Leakage (3.1%)</span>
+</div>
+<div class="flex items-center gap-1.5">
+<span class="w-2.5 h-2.5 rounded-sm bg-purple-600"></span>
+<span>Forensic Hold (0.9%)</span>
+</div>
+</div>
+</div>
+</section>
+<!-- ============================================================== -->
+<!-- 5. DUAL ANALYTICAL GRID & RIGHT RISK DETAIL DRAWER              -->
+<!-- ============================================================== -->
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-space-md items-start">
+<!-- Left: Risk Graph & Leak Radar Previews (5 Cols) -->
+<div class="lg:col-span-5 space-y-space-md">
+<!-- Box 1: Revenue Risk Graph Preview -->
+<div class="bg-surface-container-lowest border border-outline-variant rounded p-space-md">
+<div class="flex items-center justify-between pb-2 border-b border-outline-variant">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-secondary text-[18px]" data-icon="bubble_chart">bubble_chart</span>
+<h3 class="font-headline-sm text-headline-sm font-bold text-on-surface">Revenue Risk Graph</h3>
+</div>
+<a class="font-label-sm text-label-sm text-secondary hover:underline flex items-center gap-0.5" href="#">
+<span>Expand Full Graph</span>
+<span class="material-symbols-outlined text-[14px]" data-icon="open_in_new">open_in_new</span>
+</a>
+</div>
+<p class="font-body-sm text-body-sm text-outline mt-2">Correlated entity propagation: Billing Engine ↔ ERP ↔ CRM contract tier breaches.</p>
+<!-- Graph Miniature Visual Representation -->
+<div class="mt-3 h-44 rounded bg-surface-container border border-outline-variant relative overflow-hidden flex items-center justify-center p-3">
+<!-- Visual Node clusters rendered cleanly -->
+<div class="relative w-full h-full">
+<!-- Center Core Node -->
+<div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-14 h-14 rounded-full bg-primary-container text-inverse-on-surface flex flex-col items-center justify-center border-2 border-secondary shadow-md z-10">
+<span class="font-label-sm text-[10px] font-bold">ERP Core</span>
+<span class="text-[9px] text-secondary">₹248.6 Cr</span>
+</div>
+<!-- Satellite Node 1: Billing -->
+<div class="absolute top-2 left-6 px-2.5 py-1 rounded bg-surface-container-lowest border border-amber-400 shadow-xs flex items-center gap-1 z-10">
+<span class="w-2 h-2 rounded-full bg-amber-500"></span>
+<span class="font-label-sm text-[11px] font-semibold">Zuora Billing</span>
+<span class="font-data-mono-sm text-[10px] text-amber-700">₹4.2 Cr</span>
+</div>
+<!-- Satellite Node 2: CRM Contracts -->
+<div class="absolute bottom-2 left-10 px-2.5 py-1 rounded bg-surface-container-lowest border border-red-400 shadow-xs flex items-center gap-1 z-10">
+<span class="w-2 h-2 rounded-full bg-red-600"></span>
+<span class="font-label-sm text-[11px] font-semibold">Salesforce CPQ</span>
+<span class="font-data-mono-sm text-[10px] text-red-700">₹6.8 Cr</span>
+</div>
+<!-- Satellite Node 3: Stripe Gateway -->
+<div class="absolute top-4 right-8 px-2.5 py-1 rounded bg-surface-container-lowest border border-emerald-400 shadow-xs flex items-center gap-1 z-10">
+<span class="w-2 h-2 rounded-full bg-emerald-500"></span>
+<span class="font-label-sm text-[11px] font-semibold">Stripe / Adyen</span>
+<span class="font-data-mono-sm text-[10px] text-emerald-700">0.02% Diff</span>
+</div>
+<!-- Satellite Node 4: Contract Amendments -->
+<div class="absolute bottom-4 right-6 px-2.5 py-1 rounded bg-surface-container-lowest border border-purple-400 shadow-xs flex items-center gap-1 z-10">
+<span class="w-2 h-2 rounded-full bg-purple-600"></span>
+<span class="font-label-sm text-[11px] font-semibold">Ironclad MSA</span>
+<span class="font-data-mono-sm text-[10px] text-purple-700">14 Anom</span>
+</div>
+<!-- Connecting decorative lines -->
+<svg class="absolute inset-0 w-full h-full pointer-events-none" xmlns="http://www.w3.org/2000/svg">
+<line stroke="#CBD5E1" stroke-dasharray="3 3" stroke-width="1.5" x1="25%" x2="50%" y1="20%" y2="50%"></line>
+<line stroke="#F87171" stroke-width="2" x1="28%" x2="50%" y1="80%" y2="50%"></line>
+<line stroke="#CBD5E1" stroke-width="1.5" x1="75%" x2="50%" y1="25%" y2="50%"></line>
+<line stroke="#CBD5E1" stroke-width="1.5" x1="75%" x2="50%" y1="75%" y2="50%"></line>
+</svg>
+</div>
+</div>
+<!-- Risk Graph Quick Legend -->
+<div class="mt-2.5 flex items-center justify-between text-on-surface-variant font-label-sm text-label-sm">
+<span class="text-outline">Active High-Propagation Cluster: CPQ → ERP</span>
+<button class="px-2 py-0.5 rounded bg-surface-container border border-outline-variant hover:bg-surface-container-high text-on-surface font-semibold text-[11px]">
+                Inspect 184 Edges
+              </button>
+</div>
+</div>
+<!-- Box 2: Revenue Leak Radar Preview -->
+<div class="bg-surface-container-lowest border border-outline-variant rounded p-space-md">
+<div class="flex items-center justify-between pb-2 border-b border-outline-variant">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-secondary text-[18px]" data-icon="radar">radar</span>
+<h3 class="font-headline-sm text-headline-sm font-bold text-on-surface">Top Leaks Radar</h3>
+</div>
+<span class="font-data-mono-sm text-data-mono-sm px-2 py-0.5 rounded bg-red-50 text-red-700 border border-red-200 font-semibold">5 Vectors</span>
+</div>
+<div class="mt-3 space-y-2.5">
+<!-- Leak Item 1 -->
+<div class="p-2 rounded bg-surface-container-low border border-outline-variant flex items-center justify-between">
+<div>
+<div class="flex items-center gap-1.5 font-label-md text-label-md font-semibold text-on-surface">
+<span class="w-1.5 h-1.5 rounded-full bg-red-600"></span>
+<span>Unauthorized Contract Discounts</span>
+</div>
+<div class="font-body-sm text-body-sm text-outline mt-0.5">MSAs with discount override &gt; ceiling</div>
+</div>
+<div class="text-right">
+<div class="font-data-mono-md text-data-mono-md font-bold text-error">₹2.14 Cr</div>
+<div class="font-data-mono-sm text-data-mono-sm text-outline">38 Accounts</div>
+</div>
+</div>
+<!-- Leak Item 2 -->
+<div class="p-2 rounded bg-surface-container-low border border-outline-variant flex items-center justify-between">
+<div>
+<div class="flex items-center gap-1.5 font-label-md text-label-md font-semibold text-on-surface">
+<span class="w-1.5 h-1.5 rounded-full bg-amber-500"></span>
+<span>Unbilled Usage Tier Overage</span>
+</div>
+<div class="font-body-sm text-body-sm text-outline mt-0.5">API calls exceeding contracted quota</div>
+</div>
+<div class="text-right">
+<div class="font-data-mono-md text-data-mono-md font-bold text-amber-700">₹1.48 Cr</div>
+<div class="font-data-mono-sm text-data-mono-sm text-outline">19 Accounts</div>
+</div>
+</div>
+<!-- Leak Item 3 -->
+<div class="p-2 rounded bg-surface-container-low border border-outline-variant flex items-center justify-between">
+<div>
+<div class="flex items-center gap-1.5 font-label-md text-label-md font-semibold text-on-surface">
+<span class="w-1.5 h-1.5 rounded-full bg-blue-600"></span>
+<span>Lapsed SLA Penalty Reversals</span>
+</div>
+<div class="font-body-sm text-body-sm text-outline mt-0.5">Credits issued post 90-day dispute window</div>
+</div>
+<div class="text-right">
+<div class="font-data-mono-md text-data-mono-md font-bold text-on-surface">₹84.2 L</div>
+<div class="font-data-mono-sm text-data-mono-sm text-outline">12 Accounts</div>
+</div>
+</div>
+</div>
+<div class="mt-3 pt-2 border-t border-outline-variant flex items-center justify-between">
+<span class="font-data-mono-sm text-data-mono-sm text-outline">Autonomous detection latency: 140ms</span>
+<button class="h-7 px-2.5 rounded bg-surface-container-lowest border border-outline-variant hover:bg-surface-container text-on-surface font-label-sm text-label-sm font-semibold transition-colors">
+                Run Radar Deep Sweep
+              </button>
+</div>
+</div>
+</div>
+<!-- Right: Top Critical Findings Table & Slide-Over Inspector Preview (7 Cols) -->
+<div class="lg:col-span-7 space-y-space-md">
+<!-- Top Critical Findings Table Container -->
+<div class="bg-surface-container-lowest border border-outline-variant rounded p-space-md shadow-sm">
+<div class="flex items-center justify-between pb-3 border-b border-outline-variant">
+<div>
+<h3 class="font-headline-sm text-headline-sm font-bold text-on-surface">Priority Statutory Audit Findings</h3>
+<p class="font-body-sm text-body-sm text-outline mt-0.5">AI-classified revenue leak anomalies requiring controller remediation.</p>
+</div>
+<div class="flex items-center gap-2">
+<span class="font-data-mono-sm text-data-mono-sm text-outline">Showing 4 of 32 Critical</span>
+<button class="p-1 rounded text-outline hover:text-on-surface border border-outline-variant">
+<span class="material-symbols-outlined text-[16px]" data-icon="filter_list">filter_list</span>
+</button>
+</div>
+</div>
+<!-- Dense Forensic Table -->
+<div class="overflow-x-auto mt-2">
+<table class="w-full text-left border-collapse">
+<thead>
+<tr class="bg-surface-container-low border-b border-outline-variant h-8">
+<th class="px-2 py-1 font-label-sm text-label-sm text-outline font-semibold">Finding ID</th>
+<th class="px-2 py-1 font-label-sm text-label-sm text-outline font-semibold">Anomaly Type</th>
+<th class="px-2 py-1 font-label-sm text-label-sm text-outline font-semibold">Customer</th>
+<th class="px-2 py-1 font-label-sm text-label-sm text-outline font-semibold text-right">Exposure</th>
+<th class="px-2 py-1 font-label-sm text-label-sm text-outline font-semibold text-center">AI Conf.</th>
+<th class="px-2 py-1 font-label-sm text-label-sm text-outline font-semibold text-center">Status</th>
+<th class="px-2 py-1 font-label-sm text-label-sm text-outline font-semibold text-right">Actions</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-outline-variant/40">
+<!-- Highlighted Active Finding Row (Matches Side Drawer) -->
+<tr class="bg-blue-50/50 hover:bg-blue-50 border-l-2 border-secondary transition-colors cursor-pointer">
+<td class="px-2 py-2 font-data-mono-sm text-data-mono-sm font-bold text-secondary">
+                      #RR-10482
+                    </td>
+<td class="px-2 py-2 font-body-sm text-body-sm font-semibold text-on-surface">
+                      Contract Discount Breach
+                      <div class="text-[10px] text-outline font-normal font-data-mono-sm">MSA-2024-ACME-09</div>
+</td>
+<td class="px-2 py-2 font-body-sm text-body-sm text-on-surface">
+                      Acme Industries
+                      <div class="text-[10px] text-outline font-normal">Enterprise Tier</div>
+</td>
+<td class="px-2 py-2 font-data-mono-sm text-data-mono-sm font-bold text-error text-right">
+                      ₹18.4 L
+                    </td>
+<td class="px-2 py-2 text-center">
+<span class="inline-block px-1.5 py-0.5 rounded text-[10px] font-bold font-data-mono-sm bg-blue-100 text-blue-800 border border-blue-300">
+                        96% AI
+                      </span>
+</td>
+<td class="px-2 py-2 text-center">
+<span class="inline-block px-1.5 py-0.5 rounded text-[10px] font-semibold bg-red-100 text-red-800 border border-red-300">
+                        CRITICAL
+                      </span>
+</td>
+<td class="px-2 py-2 text-right">
+<div class="flex items-center justify-end gap-1">
+<button class="px-2 py-0.5 rounded bg-primary text-on-primary hover:bg-on-surface font-label-sm text-[10px] font-semibold">
+                          Inspect
+                        </button>
+<button class="p-1 rounded text-outline hover:text-secondary hover:bg-surface-container" title="Trace Chain">
+<span class="material-symbols-outlined text-[15px]" data-icon="link">link</span>
+</button>
+</div>
+</td>
+</tr>
+<!-- Row 2 -->
+<tr class="hover:bg-surface-container-low transition-colors">
+<td class="px-2 py-2 font-data-mono-sm text-data-mono-sm font-semibold text-on-surface">
+                      #RR-10479
+                    </td>
+<td class="px-2 py-2 font-body-sm text-body-sm text-on-surface">
+                      Unbilled S3 Data Storage
+                      <div class="text-[10px] text-outline font-normal font-data-mono-sm">AWS-SYN-8820</div>
+</td>
+<td class="px-2 py-2 font-body-sm text-body-sm text-on-surface">
+                      Apex Logistics
+                      <div class="text-[10px] text-outline font-normal">Standard Fleet</div>
+</td>
+<td class="px-2 py-2 font-data-mono-sm text-data-mono-sm font-bold text-amber-700 text-right">
+                      ₹9.2 L
+                    </td>
+<td class="px-2 py-2 text-center">
+<span class="inline-block px-1.5 py-0.5 rounded text-[10px] font-bold font-data-mono-sm bg-blue-100 text-blue-800 border border-blue-300">
+                        92% AI
+                      </span>
+</td>
+<td class="px-2 py-2 text-center">
+<span class="inline-block px-1.5 py-0.5 rounded text-[10px] font-semibold bg-amber-100 text-amber-800 border border-amber-300">
+                        HIGH
+                      </span>
+</td>
+<td class="px-2 py-2 text-right">
+<div class="flex items-center justify-end gap-1">
+<button class="px-2 py-0.5 rounded bg-surface-container border border-outline-variant hover:bg-surface-container-high text-on-surface font-label-sm text-[10px]">
+                          Inspect
+                        </button>
+<button class="p-1 rounded text-outline hover:text-secondary hover:bg-surface-container" title="Trace Chain">
+<span class="material-symbols-outlined text-[15px]" data-icon="link">link</span>
+</button>
+</div>
+</td>
+</tr>
+<!-- Row 3 -->
+<tr class="hover:bg-surface-container-low transition-colors">
+<td class="px-2 py-2 font-data-mono-sm text-data-mono-sm font-semibold text-on-surface">
+                      #RR-10475
+                    </td>
+<td class="px-2 py-2 font-body-sm text-body-sm text-on-surface">
+                      Negative Margin Invoicing
+                      <div class="text-[10px] text-outline font-normal font-data-mono-sm">SAP-INV-004921</div>
+</td>
+<td class="px-2 py-2 font-body-sm text-body-sm text-on-surface">
+                      Global Freight Net
+                      <div class="text-[10px] text-outline font-normal">Partner Tier</div>
+</td>
+<td class="px-2 py-2 font-data-mono-sm text-data-mono-sm font-bold text-error text-right">
+                      ₹14.1 L
+                    </td>
+<td class="px-2 py-2 text-center">
+<span class="inline-block px-1.5 py-0.5 rounded text-[10px] font-bold font-data-mono-sm bg-blue-100 text-blue-800 border border-blue-300">
+                        98% AI
+                      </span>
+</td>
+<td class="px-2 py-2 text-center">
+<span class="inline-block px-1.5 py-0.5 rounded text-[10px] font-semibold bg-red-100 text-red-800 border border-red-300">
+                        CRITICAL
+                      </span>
+</td>
+<td class="px-2 py-2 text-right">
+<div class="flex items-center justify-end gap-1">
+<button class="px-2 py-0.5 rounded bg-surface-container border border-outline-variant hover:bg-surface-container-high text-on-surface font-label-sm text-[10px]">
+                          Inspect
+                        </button>
+<button class="p-1 rounded text-outline hover:text-secondary hover:bg-surface-container" title="Trace Chain">
+<span class="material-symbols-outlined text-[15px]" data-icon="link">link</span>
+</button>
+</div>
+</td>
+</tr>
+<!-- Row 4 -->
+<tr class="hover:bg-surface-container-low transition-colors">
+<td class="px-2 py-2 font-data-mono-sm text-data-mono-sm font-semibold text-on-surface">
+                      #RR-10468
+                    </td>
+<td class="px-2 py-2 font-body-sm text-body-sm text-on-surface">
+                      Double Refund Ledger Credit
+                      <div class="text-[10px] text-outline font-normal font-data-mono-sm">STR-REF-99214</div>
+</td>
+<td class="px-2 py-2 font-body-sm text-body-sm text-on-surface">
+                      Nexa Telecommunications
+                      <div class="text-[10px] text-outline font-normal">Telecom Reseller</div>
+</td>
+<td class="px-2 py-2 font-data-mono-sm text-data-mono-sm font-bold text-amber-700 text-right">
+                      ₹6.5 L
+                    </td>
+<td class="px-2 py-2 text-center">
+<span class="inline-block px-1.5 py-0.5 rounded text-[10px] font-bold font-data-mono-sm bg-blue-100 text-blue-800 border border-blue-300">
+                        89% AI
+                      </span>
+</td>
+<td class="px-2 py-2 text-center">
+<span class="inline-block px-1.5 py-0.5 rounded text-[10px] font-semibold bg-amber-100 text-amber-800 border border-amber-300">
+                        HIGH
+                      </span>
+</td>
+<td class="px-2 py-2 text-right">
+<div class="flex items-center justify-end gap-1">
+<button class="px-2 py-0.5 rounded bg-surface-container border border-outline-variant hover:bg-surface-container-high text-on-surface font-label-sm text-[10px]">
+                          Inspect
+                        </button>
+<button class="p-1 rounded text-outline hover:text-secondary hover:bg-surface-container" title="Trace Chain">
+<span class="material-symbols-outlined text-[15px]" data-icon="link">link</span>
+</button>
+</div>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<!-- Forensic Slide-Over Inspector Card for #RR-10482 -->
+<div class="bg-surface-container-lowest border-2 border-secondary/40 rounded p-space-md shadow-sm relative overflow-hidden">
+<div class="absolute top-0 right-0 px-3 py-1 bg-secondary text-on-secondary font-label-sm text-label-sm font-semibold rounded-bl">
+              Active Inspector Focus
+            </div>
+<div class="flex items-start gap-2.5">
+<span class="material-symbols-outlined text-secondary text-[24px]" data-icon="fingerprint">fingerprint</span>
+<div>
+<div class="flex items-center gap-2">
+<span class="font-data-mono-md text-data-mono-md font-bold text-secondary">Case #RR-10482</span>
+<span class="px-1.5 py-0.2 bg-red-100 text-red-800 border border-red-300 rounded font-label-sm text-[10px] font-semibold">CRITICAL DISPUTE</span>
+</div>
+<h4 class="font-headline-sm text-headline-sm font-bold text-on-surface mt-0.5">
+                  Unauthorized Contract Discount Breach: Acme Industries
+                </h4>
+</div>
+</div>
+<!-- AI Chain of Evidence Explanation -->
+<div class="mt-3 p-3 rounded bg-surface-container-low border border-outline-variant text-body-sm space-y-2">
+<div class="flex items-center justify-between">
+<span class="font-label-sm text-label-sm font-bold text-on-surface flex items-center gap-1">
+<span class="material-symbols-outlined text-[16px] text-secondary" data-icon="auto_awesome">auto_awesome</span>
+                  AI Defensibility &amp; Forensic Explanation
+                </span>
+<span class="font-data-mono-sm text-data-mono-sm text-secondary font-semibold">Confidence: 96.4%</span>
+</div>
+<p class="text-on-surface-variant font-body-sm leading-relaxed">
+                Salesforce CPQ Quote <code class="bg-surface-container px-1 py-0.5 rounded font-data-mono-sm">#Q-88102</code> applied a retroactive 22.5% rebate without secondary VP Finance counter-signature required under Control Rule <code class="bg-surface-container px-1 py-0.5 rounded font-data-mono-sm">REV-CTRL-09</code>. Resulted in SAP ERP automatically issuing credit memos totaling ₹18.4L against unfulfilled volume thresholds.
+              </p>
+</div>
+<!-- Affected Scope Metrics -->
+<div class="grid grid-cols-3 gap-2 mt-3 pt-2 border-t border-outline-variant">
+<div class="p-2 rounded bg-surface-container text-center">
+<div class="font-label-sm text-[10px] text-outline uppercase">Revenue Exposure</div>
+<div class="font-data-mono-md text-data-mono-md font-bold text-error">₹18,40,000</div>
+</div>
+<div class="p-2 rounded bg-surface-container text-center">
+<div class="font-label-sm text-[10px] text-outline uppercase">Affected Invoices</div>
+<div class="font-data-mono-md text-data-mono-md font-bold text-on-surface">184 Invoices</div>
+</div>
+<div class="p-2 rounded bg-surface-container text-center">
+<div class="font-label-sm text-[10px] text-outline uppercase">Linked Entities</div>
+<div class="font-data-mono-md text-data-mono-md font-bold text-on-surface">27 Accounts</div>
+</div>
+</div>
+<!-- Action Enforcers -->
+<div class="mt-4 flex flex-wrap items-center justify-between gap-2 pt-2 border-t border-outline-variant">
+<div class="flex items-center gap-1.5 font-data-mono-sm text-data-mono-sm text-outline">
+<span class="material-symbols-outlined text-[14px] text-emerald-600" data-icon="lock">lock</span>
+<span>Audit Hash: SHA-256 e8f4...91c0</span>
+</div>
+<div class="flex items-center gap-2">
+<button class="h-8 px-3 rounded bg-surface-container-lowest border border-outline-variant hover:bg-surface-container text-on-surface font-label-sm text-label-sm font-semibold transition-colors">
+                  Generate Memo
+                </button>
+<button class="h-8 px-3 rounded bg-secondary text-on-secondary hover:bg-secondary-container font-label-sm text-label-sm font-semibold transition-colors shadow-sm flex items-center gap-1">
+<span class="material-symbols-outlined text-[15px]" data-icon="link">link</span>
+<span>View Evidence Chain</span>
+</button>
+<button class="h-8 px-3 rounded bg-error text-on-error hover:bg-red-700 font-label-sm text-label-sm font-semibold transition-colors shadow-sm">
+                  Quarantine Ledger
+                </button>
+</div>
+</div>
+</div>
+</div>
+</div>
+</main>
+</div>
+</body></html>

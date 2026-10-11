@@ -1,0 +1,774 @@
+<!DOCTYPE html>
+
+<html class="h-full" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>RevAI - Revenue Risk Graph</title>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&amp;family=Inter:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          "colors": {
+            "secondary-fixed-dim": "#b4c5ff",
+            "on-secondary-container": "#fefcff",
+            "surface-container-lowest": "#ffffff",
+            "on-tertiary-fixed-variant": "#5a00c6",
+            "outline-variant": "#c6c6cd",
+            "surface-container-low": "#eff4ff",
+            "surface-container": "#e5eeff",
+            "surface-bright": "#f8f9ff",
+            "on-tertiary": "#ffffff",
+            "tertiary-fixed": "#eaddff",
+            "tertiary-container": "#25005a",
+            "error": "#ba1a1a",
+            "secondary-container": "#316bf3",
+            "on-surface": "#0b1c30",
+            "surface-dim": "#cbdbf5",
+            "on-error": "#ffffff",
+            "on-primary-fixed": "#131b2e",
+            "on-tertiary-fixed": "#25005a",
+            "on-tertiary-container": "#9863ff",
+            "inverse-surface": "#213145",
+            "outline": "#76777d",
+            "tertiary": "#000000",
+            "secondary": "#0051d5",
+            "inverse-on-surface": "#eaf1ff",
+            "on-primary": "#ffffff",
+            "background": "#f8f9ff",
+            "on-secondary": "#ffffff",
+            "surface-tint": "#565e74",
+            "inverse-primary": "#bec6e0",
+            "on-primary-container": "#7c839b",
+            "secondary-fixed": "#dbe1ff",
+            "tertiary-fixed-dim": "#d2bbff",
+            "on-primary-fixed-variant": "#3f465c",
+            "primary-container": "#131b2e",
+            "surface-container-highest": "#d3e4fe",
+            "on-background": "#0b1c30",
+            "on-error-container": "#93000a",
+            "primary-fixed-dim": "#bec6e0",
+            "error-container": "#ffdad6",
+            "primary": "#000000",
+            "on-secondary-fixed": "#00174b",
+            "on-surface-variant": "#45464d",
+            "primary-fixed": "#dae2fd",
+            "surface-container-high": "#dce9ff",
+            "surface": "#f8f9ff",
+            "surface-variant": "#d3e4fe",
+            "on-secondary-fixed-variant": "#003ea8"
+          },
+          "borderRadius": {
+            "DEFAULT": "0.125rem",
+            "lg": "0.25rem",
+            "xl": "0.5rem",
+            "full": "0.75rem"
+          },
+          "spacing": {
+            "space-lg": "1rem",
+            "gutter": "1rem",
+            "space-xl": "1.5rem",
+            "space-2xl": "2rem",
+            "space-xxs": "0.125rem",
+            "margin": "1.5rem",
+            "space-sm": "0.5rem",
+            "space-xs": "0.25rem",
+            "space-md": "0.75rem"
+          },
+          "fontFamily": {
+            "headline-lg": ["IBM Plex Sans"],
+            "headline-xl": ["IBM Plex Sans"],
+            "body-sm": ["Inter"],
+            "data-mono-sm": ["IBM Plex Sans"],
+            "body-lg": ["Inter"],
+            "body-md": ["Inter"],
+            "data-mono-md": ["IBM Plex Sans"],
+            "data-mono-lg": ["IBM Plex Sans"],
+            "headline-sm": ["IBM Plex Sans"],
+            "headline-md": ["IBM Plex Sans"],
+            "label-md": ["IBM Plex Sans"],
+            "label-sm": ["IBM Plex Sans"]
+          },
+          "fontSize": {
+            "headline-lg": ["24px", { "lineHeight": "32px", "letterSpacing": "-0.015em", "fontWeight": "600" }],
+            "headline-xl": ["32px", { "lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "600" }],
+            "body-sm": ["12px", { "lineHeight": "16px", "letterSpacing": "0em", "fontWeight": "400" }],
+            "data-mono-sm": ["11px", { "lineHeight": "14px", "letterSpacing": "0.01em", "fontWeight": "500" }],
+            "body-lg": ["15px", { "lineHeight": "22px", "letterSpacing": "-0.005em", "fontWeight": "400" }],
+            "body-md": ["13px", { "lineHeight": "18px", "letterSpacing": "0em", "fontWeight": "400" }],
+            "data-mono-md": ["13px", { "lineHeight": "18px", "letterSpacing": "0em", "fontWeight": "500" }],
+            "data-mono-lg": ["18px", { "lineHeight": "24px", "letterSpacing": "-0.01em", "fontWeight": "600" }],
+            "headline-sm": ["16px", { "lineHeight": "24px", "letterSpacing": "-0.005em", "fontWeight": "600" }],
+            "headline-md": ["20px", { "lineHeight": "28px", "letterSpacing": "-0.01em", "fontWeight": "600" }],
+            "label-md": ["12px", { "lineHeight": "16px", "letterSpacing": "0.02em", "fontWeight": "600" }],
+            "label-sm": ["11px", { "lineHeight": "14px", "letterSpacing": "0.04em", "fontWeight": "600" }]
+          }
+        }
+      }
+    }
+  </script>
+<style>
+    .material-symbols-outlined {
+      font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 20;
+      font-size: 18px;
+      line-height: 1;
+      display: inline-block;
+      vertical-align: middle;
+    }
+    @keyframes pulse-crimson {
+      0%, 100% {
+        box-shadow: 0 0 0 0 rgba(186, 26, 26, 0.4), 0 0 0 0 rgba(186, 26, 26, 0.2);
+      }
+      50% {
+        box-shadow: 0 0 0 10px rgba(186, 26, 26, 0), 0 0 0 18px rgba(186, 26, 26, 0);
+      }
+    }
+    .crimson-pulse {
+      animation: pulse-crimson 2.4s infinite cubic-bezier(0.4, 0, 0.6, 1);
+    }
+    .custom-scrollbar::-webkit-scrollbar {
+      width: 4px;
+      height: 4px;
+    }
+    .custom-scrollbar::-webkit-scrollbar-track {
+      background: transparent;
+    }
+    .custom-scrollbar::-webkit-scrollbar-thumb {
+      background: #c6c6cd;
+      border-radius: 2px;
+    }
+  </style>
+</head>
+<body class="bg-background text-on-surface h-full w-full overflow-hidden flex flex-col font-body-md select-none">
+<!-- TOP APP BAR (from Shared Components JSON: TopNavBar) -->
+<header class="flex justify-between items-center h-14 w-full px-space-lg bg-surface-container-lowest border-b border-outline-variant z-40 shrink-0">
+<!-- Brand & Left Breadcrumbs -->
+<div class="flex items-center gap-space-lg">
+<div class="flex items-center gap-space-sm">
+<span class="font-headline-sm text-headline-sm font-semibold text-primary tracking-tight">RevAI</span>
+<span class="text-outline-variant">/</span>
+<nav class="flex items-center gap-space-xs font-label-sm text-label-sm">
+<span class="text-on-surface-variant font-medium">Audit Intelligence</span>
+<span class="text-outline-variant">/</span>
+<span class="text-secondary font-semibold">Revenue Risk Graph</span>
+</nav>
+</div>
+<!-- Universal Search Bar (on_left) -->
+<div class="relative w-80 ml-space-md">
+<span class="material-symbols-outlined absolute left-2.5 top-2 text-outline text-[16px]">search</span>
+<input class="w-full h-8 pl-8 pr-3 bg-surface-bright border border-outline-variant rounded text-body-sm text-on-surface placeholder-outline focus:outline-none focus:border-secondary focus:ring-1 focus:ring-secondary transition-all" placeholder="Search graph by Risk ID, Entity, Contract, Hash..." type="text"/>
+<span class="absolute right-2 top-2 font-data-mono-sm text-data-mono-sm text-outline px-1 bg-surface-container-high rounded border border-outline-variant">⌘K</span>
+</div>
+</div>
+<!-- Trailing Actions & Period Badge -->
+<div class="flex items-center gap-space-md">
+<!-- Period Selector / trailing_secondary_action -->
+<div class="flex items-center gap-1.5 px-2.5 py-1 bg-surface-container-low border border-outline-variant rounded font-data-mono-sm text-data-mono-sm text-on-surface">
+<span class="material-symbols-outlined text-[15px] text-secondary">calendar_today</span>
+<span>Q3 FY2026 / 01 Jul - 30 Sep</span>
+</div>
+<!-- AI Action / trailing_primary_action -->
+<button class="flex items-center gap-1.5 px-3 py-1 bg-secondary text-on-secondary rounded font-label-sm text-label-sm font-medium hover:bg-secondary-container transition-all active:scale-[0.98]">
+<span class="material-symbols-outlined text-[16px]">auto_awesome</span>
+<span>Ask RevAI</span>
+</button>
+<div class="h-5 w-[1px] bg-outline-variant mx-space-xs"></div>
+<!-- Icon Actions: notifications, help, sync -->
+<div class="flex items-center gap-1 text-on-surface-variant">
+<button class="p-1.5 hover:bg-surface-container-low rounded text-on-surface-variant transition-colors" title="Sync SAP/Salesforce">
+<span class="material-symbols-outlined">sync</span>
+</button>
+<button class="p-1.5 hover:bg-surface-container-low rounded text-on-surface-variant transition-colors relative" title="Notifications">
+<span class="material-symbols-outlined">notifications</span>
+<span class="absolute top-1 right-1 w-1.5 h-1.5 bg-error rounded-full"></span>
+</button>
+<button class="p-1.5 hover:bg-surface-container-low rounded text-on-surface-variant transition-colors" title="Help &amp; Documentation">
+<span class="material-symbols-outlined">help</span>
+</button>
+</div>
+<!-- Profile Avatar -->
+<div class="flex items-center pl-space-xs">
+<div class="w-7 h-7 rounded border border-outline-variant bg-surface-container-high flex items-center justify-center font-headline-sm text-[12px] font-semibold text-primary cursor-pointer hover:border-secondary" title="Chief Revenue Auditor Profile Avatar">
+          RA
+        </div>
+</div>
+</div>
+</header>
+<!-- MAIN BODY LAYOUT (Left SideNav + Canvas + Right Inspection Drawer) -->
+<div class="flex flex-1 w-full overflow-hidden relative">
+<!-- LEFT SIDEBAR (from Shared Components JSON: SideNavBar) -->
+<aside class="w-64 flex flex-col justify-between py-space-md px-space-xs border-r border-outline-variant bg-surface-container-lowest shrink-0 z-30 select-none">
+<!-- Workspace Header -->
+<div class="px-space-sm mb-space-md border-b border-outline-variant/60 pb-space-sm">
+<div class="flex items-center gap-space-sm">
+<div class="w-6 h-6 rounded bg-primary-container text-surface-bright flex items-center justify-center font-bold text-[13px]">
+<span class="material-symbols-outlined text-[15px]">security</span>
+</div>
+<div>
+<div class="font-headline-sm text-headline-sm font-semibold text-on-surface leading-tight">RevAI Revenue Assurance</div>
+<div class="font-data-mono-sm text-[10px] text-outline font-medium">Active · Self-learning v4.2.1</div>
+</div>
+</div>
+<!-- Run Live Reconciliation CTA -->
+<button class="mt-space-md w-full flex items-center justify-center gap-1.5 py-1.5 px-space-sm bg-primary text-on-primary rounded font-label-sm text-label-sm hover:bg-primary-container transition-all active:scale-[0.99]">
+<span class="material-symbols-outlined text-[15px]">bolt</span>
+<span>Run Live Reconciliation</span>
+</button>
+</div>
+<!-- Navigation Links (Scrollable) -->
+<div class="flex-1 overflow-y-auto custom-scrollbar px-1 space-y-0.5">
+<div class="font-label-sm text-[10px] tracking-wider uppercase text-outline px-2 py-1">Core Audit</div>
+<a class="flex items-center gap-2.5 px-2.5 py-1.5 rounded font-label-sm text-label-sm text-on-surface-variant font-normal hover:bg-surface-container-low transition-colors" href="#">
+<span class="material-symbols-outlined text-[17px]">dashboard</span>
+<span>Overview</span>
+</a>
+<!-- ACTIVE TAB: Revenue Risk Graph -->
+<a class="flex items-center gap-2.5 px-2.5 py-1.5 rounded font-label-sm text-label-sm bg-surface-container-high text-secondary border-l-2 border-secondary font-semibold" href="#">
+<span class="material-symbols-outlined text-[17px]">bubble_chart</span>
+<span>Revenue Risk Graph</span>
+<span class="ml-auto w-2 h-2 rounded-full bg-error"></span>
+</a>
+<a class="flex items-center gap-2.5 px-2.5 py-1.5 rounded font-label-sm text-label-sm text-on-surface-variant font-normal hover:bg-surface-container-low transition-colors" href="#">
+<span class="material-symbols-outlined text-[17px]">radar</span>
+<span>Revenue Leak Radar</span>
+</a>
+<a class="flex items-center gap-2.5 px-2.5 py-1.5 rounded font-label-sm text-label-sm text-on-surface-variant font-normal hover:bg-surface-container-low transition-colors" href="#">
+<span class="material-symbols-outlined text-[17px]">receipt_long</span>
+<span>Transactions</span>
+</a>
+<a class="flex items-center gap-2.5 px-2.5 py-1.5 rounded font-label-sm text-label-sm text-on-surface-variant font-normal hover:bg-surface-container-low transition-colors" href="#">
+<span class="material-symbols-outlined text-[17px]">fingerprint</span>
+<span>Transaction DNA</span>
+</a>
+<a class="flex items-center gap-2.5 px-2.5 py-1.5 rounded font-label-sm text-label-sm text-on-surface-variant font-normal hover:bg-surface-container-low transition-colors" href="#">
+<span class="material-symbols-outlined text-[17px]">timeline</span>
+<span>Revenue Timeline</span>
+</a>
+<div class="font-label-sm text-[10px] tracking-wider uppercase text-outline px-2 pt-3 pb-1">Forensic Ledger</div>
+<a class="flex items-center gap-2.5 px-2.5 py-1.5 rounded font-label-sm text-label-sm text-on-surface-variant font-normal hover:bg-surface-container-low transition-colors" href="#">
+<span class="material-symbols-outlined text-[17px]">link</span>
+<span>AI Evidence Chain</span>
+</a>
+<a class="flex items-center gap-2.5 px-2.5 py-1.5 rounded font-label-sm text-label-sm text-on-surface-variant font-normal hover:bg-surface-container-low transition-colors" href="#">
+<span class="material-symbols-outlined text-[17px]">assignment</span>
+<span>Audit Cases</span>
+<span class="ml-auto font-data-mono-sm text-[10px] px-1 bg-surface-container-high rounded text-on-surface-variant">14</span>
+</a>
+<a class="flex items-center gap-2.5 px-2.5 py-1.5 rounded font-label-sm text-label-sm text-on-surface-variant font-normal hover:bg-surface-container-low transition-colors" href="#">
+<span class="material-symbols-outlined text-[17px]">shield</span>
+<span>Controls</span>
+</a>
+<a class="flex items-center gap-2.5 px-2.5 py-1.5 rounded font-label-sm text-label-sm text-on-surface-variant font-normal hover:bg-surface-container-low transition-colors" href="#">
+<span class="material-symbols-outlined text-[17px]">fact_check</span>
+<span>Findings</span>
+</a>
+<a class="flex items-center gap-2.5 px-2.5 py-1.5 rounded font-label-sm text-label-sm text-on-surface-variant font-normal hover:bg-surface-container-low transition-colors" href="#">
+<span class="material-symbols-outlined text-[17px]">inventory_2</span>
+<span>Evidence Vault</span>
+</a>
+<div class="font-label-sm text-[10px] tracking-wider uppercase text-outline px-2 pt-3 pb-1">AI Intelligence</div>
+<a class="flex items-center gap-2.5 px-2.5 py-1.5 rounded font-label-sm text-label-sm text-on-surface-variant font-normal hover:bg-surface-container-low transition-colors" href="#">
+<span class="material-symbols-outlined text-[17px]">auto_awesome</span>
+<span>AI Insights</span>
+</a>
+<a class="flex items-center gap-2.5 px-2.5 py-1.5 rounded font-label-sm text-label-sm text-on-surface-variant font-normal hover:bg-surface-container-low transition-colors" href="#">
+<span class="material-symbols-outlined text-[17px]">psychology</span>
+<span>Model Intelligence</span>
+</a>
+<a class="flex items-center gap-2.5 px-2.5 py-1.5 rounded font-label-sm text-label-sm text-on-surface-variant font-normal hover:bg-surface-container-low transition-colors" href="#">
+<span class="material-symbols-outlined text-[17px]">neurology</span>
+<span>Self-Learning Feedback</span>
+</a>
+<a class="flex items-center gap-2.5 px-2.5 py-1.5 rounded font-label-sm text-label-sm text-on-surface-variant font-normal hover:bg-surface-container-low transition-colors" href="#">
+<span class="material-symbols-outlined text-[17px]">history</span>
+<span>AI Activity</span>
+</a>
+<div class="font-label-sm text-[10px] tracking-wider uppercase text-outline px-2 pt-3 pb-1">Reporting &amp; Governance</div>
+<a class="flex items-center gap-2.5 px-2.5 py-1.5 rounded font-label-sm text-label-sm text-on-surface-variant font-normal hover:bg-surface-container-low transition-colors" href="#">
+<span class="material-symbols-outlined text-[17px]">summarize</span>
+<span>Audit Reports</span>
+</a>
+<a class="flex items-center gap-2.5 px-2.5 py-1.5 rounded font-label-sm text-label-sm text-on-surface-variant font-normal hover:bg-surface-container-low transition-colors" href="#">
+<span class="material-symbols-outlined text-[17px]">analytics</span>
+<span>Revenue Reports</span>
+</a>
+<a class="flex items-center gap-2.5 px-2.5 py-1.5 rounded font-label-sm text-label-sm text-on-surface-variant font-normal hover:bg-surface-container-low transition-colors" href="#">
+<span class="material-symbols-outlined text-[17px]">published_with_changes</span>
+<span>Recovery Reports</span>
+</a>
+<a class="flex items-center gap-2.5 px-2.5 py-1.5 rounded font-label-sm text-label-sm text-on-surface-variant font-normal hover:bg-surface-container-low transition-colors" href="#">
+<span class="material-symbols-outlined text-[17px]">file_download</span>
+<span>Export Center</span>
+</a>
+<a class="flex items-center gap-2.5 px-2.5 py-1.5 rounded font-label-sm text-label-sm text-on-surface-variant font-normal hover:bg-surface-container-low transition-colors" href="#">
+<span class="material-symbols-outlined text-[17px]">database</span>
+<span>Data Sources</span>
+</a>
+<a class="flex items-center gap-2.5 px-2.5 py-1.5 rounded font-label-sm text-label-sm text-on-surface-variant font-normal hover:bg-surface-container-low transition-colors" href="#">
+<span class="material-symbols-outlined text-[17px]">rule</span>
+<span>Rules &amp; Controls</span>
+</a>
+<a class="flex items-center gap-2.5 px-2.5 py-1.5 rounded font-label-sm text-label-sm text-on-surface-variant font-normal hover:bg-surface-container-low transition-colors" href="#">
+<span class="material-symbols-outlined text-[17px]">settings</span>
+<span>Settings</span>
+</a>
+</div>
+<!-- Footer Action Links -->
+<div class="pt-space-sm border-t border-outline-variant/60 mt-space-sm space-y-0.5">
+<a class="flex items-center gap-2 px-2 py-1 text-on-surface-variant font-body-sm text-body-sm hover:text-on-surface transition-colors" href="#">
+<span class="material-symbols-outlined text-[16px]">sync_alt</span>
+<span>Sync SAP/Salesforce</span>
+</a>
+<a class="flex items-center gap-2 px-2 py-1 text-on-surface-variant font-body-sm text-body-sm hover:text-on-surface transition-colors" href="#">
+<span class="material-symbols-outlined text-[16px]">corporate_fare</span>
+<span>Org Workspace</span>
+</a>
+<a class="flex items-center gap-2 px-2 py-1 text-on-surface-variant font-body-sm text-body-sm hover:text-on-surface transition-colors" href="#">
+<span class="material-symbols-outlined text-[16px]">admin_panel_settings</span>
+<span>Admin Console</span>
+</a>
+</div>
+</aside>
+<!-- CENTER GRAPH WORKSPACE -->
+<main class="flex-1 flex flex-col h-full bg-background relative overflow-hidden">
+<!-- SUB-HEADER: Title + View Switcher Modes -->
+<div class="h-14 px-space-lg bg-surface-container-lowest border-b border-outline-variant flex items-center justify-between shrink-0">
+<div>
+<h1 class="font-headline-md text-headline-md font-semibold text-on-surface tracking-tight">Revenue Risk Graph</h1>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Map how transactions, customers, controls, systems and revenue risks connect.</p>
+</div>
+<!-- Graph View Mode Pills -->
+<div class="flex items-center bg-surface-container-low p-0.5 rounded border border-outline-variant">
+<button class="px-2.5 py-1 rounded bg-surface-container-lowest text-secondary font-label-sm text-label-sm font-semibold shadow-xs">Risk</button>
+<button class="px-2.5 py-1 rounded text-on-surface-variant font-label-sm text-label-sm hover:text-on-surface">Revenue</button>
+<button class="px-2.5 py-1 rounded text-on-surface-variant font-label-sm text-label-sm hover:text-on-surface">Customer</button>
+<button class="px-2.5 py-1 rounded text-on-surface-variant font-label-sm text-label-sm hover:text-on-surface">Transaction</button>
+<button class="px-2.5 py-1 rounded text-on-surface-variant font-label-sm text-label-sm hover:text-on-surface">Control</button>
+<button class="px-2.5 py-1 rounded text-on-surface-variant font-label-sm text-label-sm hover:text-on-surface">Evidence</button>
+<button class="px-2.5 py-1 rounded text-on-surface-variant font-label-sm text-label-sm hover:text-on-surface">System</button>
+</div>
+</div>
+<!-- FILTER CONTROLLER BAR -->
+<div class="px-space-lg py-2 bg-surface-bright border-b border-outline-variant flex flex-wrap items-center justify-between gap-space-md shrink-0">
+<div class="flex items-center gap-space-lg">
+<!-- Risk Score Slider -->
+<div class="flex items-center gap-2">
+<span class="font-label-sm text-label-sm text-on-surface-variant">Risk Score:</span>
+<div class="flex items-center gap-2">
+<input class="w-24 h-1.5 bg-surface-container-highest accent-error cursor-pointer rounded-lg" max="100" min="0" type="range" value="75"/>
+<span class="font-data-mono-sm text-data-mono-sm font-semibold text-error px-1.5 py-0.5 bg-error-container/50 border border-error/30 rounded">&gt; 75</span>
+</div>
+</div>
+<!-- Revenue Exposure Range -->
+<div class="flex items-center gap-2 pl-space-md border-l border-outline-variant">
+<span class="font-label-sm text-label-sm text-on-surface-variant">Exposure:</span>
+<div class="flex items-center gap-1 font-data-mono-sm text-data-mono-sm bg-surface-container-lowest px-2 py-1 border border-outline-variant rounded">
+<span class="text-on-surface font-semibold">₹0 - ₹10 Cr+</span>
+</div>
+</div>
+<!-- Source System Dropdown -->
+<div class="flex items-center gap-2 pl-space-md border-l border-outline-variant">
+<span class="font-label-sm text-label-sm text-on-surface-variant">System:</span>
+<div class="flex items-center gap-1.5">
+<span class="px-2 py-0.5 bg-surface-container-high text-on-surface font-data-mono-sm text-data-mono-sm rounded border border-outline-variant">SAP ERP</span>
+<span class="px-2 py-0.5 bg-surface-container-high text-on-surface font-data-mono-sm text-data-mono-sm rounded border border-outline-variant">Salesforce</span>
+<span class="px-2 py-0.5 bg-surface-container-low text-outline font-data-mono-sm text-data-mono-sm rounded border border-outline-variant">+2 More</span>
+</div>
+</div>
+<!-- Business Unit Filter -->
+<div class="flex items-center gap-2 pl-space-md border-l border-outline-variant">
+<span class="font-label-sm text-label-sm text-on-surface-variant">Unit:</span>
+<select class="h-7 text-body-sm bg-surface-container-lowest border border-outline-variant rounded px-2 font-label-sm text-label-sm text-on-surface">
+<option>Enterprise Cloud &amp; APAC Ops</option>
+<option>Enterprise Cloud Only</option>
+<option>APAC Ops Only</option>
+<option>Global Consolidation</option>
+</select>
+</div>
+<!-- Audit Status -->
+<div class="flex items-center gap-1.5 pl-space-md border-l border-outline-variant">
+<span class="w-2 h-2 rounded-full bg-error"></span>
+<span class="font-label-sm text-label-sm font-semibold text-on-surface">Unresolved &amp; In Review</span>
+</div>
+</div>
+<!-- Canvas Controls -->
+<div class="flex items-center gap-1">
+<button class="p-1.5 bg-surface-container-lowest border border-outline-variant rounded hover:bg-surface-container-low text-on-surface-variant" title="Zoom In">
+<span class="material-symbols-outlined text-[16px]">add</span>
+</button>
+<button class="p-1.5 bg-surface-container-lowest border border-outline-variant rounded hover:bg-surface-container-low text-on-surface-variant" title="Zoom Out">
+<span class="material-symbols-outlined text-[16px]">remove</span>
+</button>
+<button class="p-1.5 bg-surface-container-lowest border border-outline-variant rounded hover:bg-surface-container-low text-on-surface-variant" title="Recenter Graph">
+<span class="material-symbols-outlined text-[16px]">filter_center_focus</span>
+</button>
+<button class="p-1.5 bg-surface-container-lowest border border-outline-variant rounded hover:bg-surface-container-low text-on-surface-variant" title="Export Topology">
+<span class="material-symbols-outlined text-[16px]">share</span>
+</button>
+</div>
+</div>
+<!-- INTERACTIVE GRAPH CANVAS CONTAINER -->
+<div class="flex-1 w-full relative overflow-hidden bg-[#F8FAFC]">
+<!-- Mathematical Grid Background -->
+<div class="absolute inset-0 bg-[radial-gradient(#CBD5E1_1px,transparent_1px)] [background-size:24px_24px] opacity-60"></div>
+<!-- SVG Lineage Edges Layer -->
+<svg class="absolute inset-0 w-full h-full pointer-events-none" xmlns="http://www.w3.org/2000/svg">
+<defs>
+<marker id="arrow" markerheight="6" markerwidth="6" orient="auto-start-reverse" refx="8" refy="5" viewbox="0 0 10 10">
+<path d="M 0 1 L 10 5 L 0 9 z" fill="#94A3B8"></path>
+</marker>
+<marker id="arrow-crimson" markerheight="6" markerwidth="6" orient="auto-start-reverse" refx="8" refy="5" viewbox="0 0 10 10">
+<path d="M 0 1 L 10 5 L 0 9 z" fill="#DC2626"></path>
+</marker>
+<lineargradient id="gradient-edge-alert" x1="0%" x2="100%" y1="0%" y2="100%">
+<stop offset="0%" stop-color="#2563EB" stop-opacity="0.6"></stop>
+<stop offset="100%" stop-color="#DC2626" stop-opacity="0.9"></stop>
+</lineargradient>
+</defs>
+<!-- Lineage Connections -->
+<!-- Customer (Acme) -> Contract CNT-88421 -->
+<line marker-end="url(#arrow)" stroke="#94A3B8" stroke-dasharray="4,4" stroke-width="1.5" x1="210" x2="330" y1="130" y2="210"></line>
+<!-- Contract CNT-88421 -> Control CTRL-003 -->
+<line marker-end="url(#arrow)" stroke="#94A3B8" stroke-width="1.5" x1="430" x2="520" y1="210" y2="130"></line>
+<!-- Contract CNT-88421 -> Order/Invoice INV-10282 -->
+<line marker-end="url(#arrow)" stroke="#94A3B8" stroke-width="2" x1="400" x2="400" y1="235" y2="330"></line>
+<!-- Invoice INV-10282 -> Transaction TX-104982 -->
+<line marker-end="url(#arrow)" stroke="#94A3B8" stroke-width="2" x1="450" x2="560" y1="365" y2="365"></line>
+<!-- Control CTRL-003 -> Risk Node #RR-10482 (CRITICAL DEFECT LINE) -->
+<path d="M 580 145 C 640 180, 650 220, 670 270" fill="none" marker-end="url(#arrow-crimson)" stroke="#DC2626" stroke-dasharray="6,4" stroke-width="2.5"></path>
+<!-- Transaction TX-104982 -> Risk Node #RR-10482 -->
+<line marker-end="url(#arrow-crimson)" stroke="url(#gradient-edge-alert)" stroke-width="2.5" x1="620" x2="665" y1="345" y2="310"></line>
+<!-- Customer (Apex Global) -> Contract CNT-88421 -->
+<line marker-end="url(#arrow)" stroke="#CBD5E1" stroke-width="1.5" x1="210" x2="310" y1="260" y2="225"></line>
+<!-- Control CTRL-001 -> Invoice INV-10499 -->
+<line marker-end="url(#arrow)" stroke="#94A3B8" stroke-width="1.5" x1="560" x2="440" y1="465" y2="495"></line>
+<!-- Invoice INV-10499 -> Transaction TX-98214 -->
+<line marker-end="url(#arrow)" stroke="#94A3B8" stroke-width="1.5" x1="370" x2="320" y1="520" y2="570"></line>
+<!-- Starlight Media -> Invoice INV-10499 -->
+<line marker-end="url(#arrow)" stroke="#CBD5E1" stroke-width="1.5" x1="210" x2="330" y1="480" y2="495"></line>
+</svg>
+<!-- GRAPH NODES -->
+<!-- 1. Customer Node: Acme Industries Corp -->
+<div class="absolute left-20 top-24 bg-surface-container-lowest border border-outline-variant hover:border-secondary p-2.5 rounded shadow-sm w-48 transition-all hover:scale-105 cursor-pointer">
+<div class="flex items-center justify-between mb-1">
+<span class="font-data-mono-sm text-[10px] text-outline font-semibold">CUSTOMER ENTITY</span>
+<span class="w-2 h-2 rounded-full bg-emerald-500"></span>
+</div>
+<div class="flex items-center gap-2">
+<div class="w-7 h-7 bg-surface-container-high rounded flex items-center justify-center text-secondary">
+<span class="material-symbols-outlined text-[16px]">domain</span>
+</div>
+<div>
+<div class="font-headline-sm text-[12px] font-semibold text-on-surface">Acme Industries Corp</div>
+<div class="font-data-mono-sm text-[10px] text-outline">Tier-1 Global · ARR $4.2M</div>
+</div>
+</div>
+</div>
+<!-- 2. Customer Node: Apex Global Ltd -->
+<div class="absolute left-20 top-60 bg-surface-container-lowest border border-outline-variant p-2.5 rounded shadow-sm w-48 opacity-80 hover:opacity-100 cursor-pointer">
+<div class="flex items-center justify-between mb-1">
+<span class="font-data-mono-sm text-[10px] text-outline">CUSTOMER ENTITY</span>
+<span class="w-2 h-2 rounded-full bg-emerald-500"></span>
+</div>
+<div class="flex items-center gap-2">
+<div class="w-7 h-7 bg-surface-container rounded flex items-center justify-center text-outline">
+<span class="material-symbols-outlined text-[16px]">domain</span>
+</div>
+<div>
+<div class="font-headline-sm text-[12px] font-semibold text-on-surface">Apex Global Ltd</div>
+<div class="font-data-mono-sm text-[10px] text-outline">APAC Hub · ARR $1.8M</div>
+</div>
+</div>
+</div>
+<!-- 3. Customer Node: Starlight Media -->
+<div class="absolute left-20 bottom-36 bg-surface-container-lowest border border-outline-variant p-2.5 rounded shadow-sm w-48 opacity-80 hover:opacity-100 cursor-pointer">
+<div class="flex items-center justify-between mb-1">
+<span class="font-data-mono-sm text-[10px] text-outline">CUSTOMER ENTITY</span>
+<span class="w-2 h-2 rounded-full bg-emerald-500"></span>
+</div>
+<div class="flex items-center gap-2">
+<div class="w-7 h-7 bg-surface-container rounded flex items-center justify-center text-outline">
+<span class="material-symbols-outlined text-[16px]">domain</span>
+</div>
+<div>
+<div class="font-headline-sm text-[12px] font-semibold text-on-surface">Starlight Media</div>
+<div class="font-data-mono-sm text-[10px] text-outline">EMEA · ARR $920K</div>
+</div>
+</div>
+</div>
+<!-- 4. Contract Node: CNT-88421 (Enterprise Master Agreement) -->
+<div class="absolute left-[310px] top-44 bg-surface-container-lowest border border-secondary p-3 rounded shadow-md w-56 cursor-pointer">
+<div class="flex items-center justify-between mb-1.5">
+<span class="font-data-mono-sm text-[10px] font-semibold text-secondary bg-surface-container-high px-1.5 py-0.5 rounded">CONTRACT MASTER</span>
+<span class="font-data-mono-sm text-[10px] text-outline">Salesforce CRM</span>
+</div>
+<div class="font-headline-sm text-[13px] font-semibold text-on-surface">CNT-88421</div>
+<div class="font-body-sm text-[11px] text-on-surface-variant truncate">Enterprise Master Agreement</div>
+<div class="mt-2 pt-1.5 border-t border-outline-variant flex justify-between font-data-mono-sm text-[10px]">
+<span class="text-outline">Max Disc: <strong class="text-on-surface">10.0%</strong></span>
+<span class="text-secondary font-semibold">Active FY26</span>
+</div>
+</div>
+<!-- 5. Control Node: CTRL-003 (Discount Threshold Policy) -->
+<div class="absolute left-[510px] top-20 bg-surface-container-lowest border border-error/50 p-2.5 rounded shadow-sm w-52 cursor-pointer">
+<div class="flex items-center justify-between mb-1">
+<span class="font-data-mono-sm text-[10px] font-semibold text-error bg-error-container/40 px-1 rounded">INTERNAL CONTROL</span>
+<span class="material-symbols-outlined text-[15px] text-error">gavel</span>
+</div>
+<div class="font-headline-sm text-[12px] font-semibold text-on-surface">CTRL-003</div>
+<div class="font-body-sm text-[11px] text-on-surface-variant">Discount Threshold Policy</div>
+<div class="mt-1 font-data-mono-sm text-[10px] text-error font-semibold">VIOLATION DETECTED</div>
+</div>
+<!-- 6. Invoice Node: INV-10282 -->
+<div class="absolute left-[340px] top-80 bg-surface-container-lowest border border-outline-variant p-2.5 rounded shadow-sm w-52 cursor-pointer">
+<div class="flex items-center justify-between mb-1">
+<span class="font-data-mono-sm text-[10px] text-outline">INVOICE AR</span>
+<span class="font-data-mono-sm text-[10px] text-outline">SAP Billing</span>
+</div>
+<div class="font-headline-sm text-[12px] font-semibold text-on-surface">INV-10282</div>
+<div class="font-data-mono-sm text-data-mono-sm font-semibold text-on-surface">₹24,80,000.00</div>
+<div class="mt-1 font-data-mono-sm text-[10px] text-error">Discount Applied: 18.0%</div>
+</div>
+<!-- 7. Transaction Node: TX-104982 -->
+<div class="absolute left-[540px] top-84 bg-surface-container-lowest border border-outline-variant p-2 rounded shadow-sm w-44 cursor-pointer">
+<div class="flex items-center justify-between">
+<span class="font-data-mono-sm text-[10px] text-outline">TRANSACTION</span>
+<span class="material-symbols-outlined text-[14px] text-outline">paid</span>
+</div>
+<div class="font-headline-sm text-[12px] font-semibold text-on-surface mt-1">TX-104982</div>
+<div class="font-data-mono-sm text-[10px] text-outline-variant">Net Ledger Post #9921</div>
+</div>
+<!-- 8. Control Node: CTRL-001 (Contract Match) -->
+<div class="absolute left-[540px] bottom-36 bg-surface-container-lowest border border-outline-variant p-2 rounded shadow-sm w-48 opacity-90 cursor-pointer">
+<div class="flex items-center justify-between">
+<span class="font-data-mono-sm text-[10px] text-emerald-700 bg-emerald-50 px-1 rounded">CONTROL VERIFIED</span>
+<span class="material-symbols-outlined text-[15px] text-emerald-700">verified_user</span>
+</div>
+<div class="font-headline-sm text-[12px] font-semibold text-on-surface mt-1">CTRL-001</div>
+<div class="font-body-sm text-[11px] text-on-surface-variant">Contract Line Matching</div>
+</div>
+<!-- 9. Invoice Node: INV-10499 -->
+<div class="absolute left-[330px] bottom-28 bg-surface-container-lowest border border-outline-variant p-2 rounded shadow-sm w-48 opacity-90 cursor-pointer">
+<div class="flex items-center justify-between">
+<span class="font-data-mono-sm text-[10px] text-outline">INVOICE AR</span>
+<span class="font-data-mono-sm text-[10px] text-emerald-700">COMPLIANT</span>
+</div>
+<div class="font-headline-sm text-[12px] font-semibold text-on-surface mt-1">INV-10499</div>
+<div class="font-data-mono-sm text-data-mono-sm text-on-surface">₹8,12,000.00</div>
+</div>
+<!-- 10. Transaction Node: TX-98214 -->
+<div class="absolute left-[240px] bottom-10 bg-surface-container-lowest border border-outline-variant p-2 rounded shadow-sm w-40 opacity-80 cursor-pointer">
+<div class="flex items-center justify-between">
+<span class="font-data-mono-sm text-[10px] text-outline">TRANSACTION</span>
+<span class="font-data-mono-sm text-[10px] text-outline">Stripe</span>
+</div>
+<div class="font-headline-sm text-[11px] font-semibold text-on-surface mt-1">TX-98214</div>
+<div class="font-data-mono-sm text-[10px] text-outline">Settled · FY26-Q3</div>
+</div>
+<!-- 11. RISK & FINDING NODE: Risk #RR-10482 (High-Severity Pulsing Crimson Anchor) -->
+<div class="absolute left-[640px] top-56 bg-surface-container-lowest border-2 border-error p-3.5 rounded-lg shadow-xl w-64 crimson-pulse cursor-pointer z-20">
+<div class="flex items-center justify-between mb-1.5">
+<span class="flex items-center gap-1 font-label-sm text-[10px] uppercase font-bold text-white bg-error px-2 py-0.5 rounded">
+<span class="material-symbols-outlined text-[12px]">warning</span>
+              Critical Risk
+            </span>
+<span class="font-data-mono-sm text-data-mono-sm font-bold text-error">92/100</span>
+</div>
+<div class="font-headline-sm text-[13px] font-bold text-on-surface">Risk #RR-10482</div>
+<div class="font-body-sm text-[12px] text-error font-medium leading-snug mt-0.5">Pricing Anomaly Violation</div>
+<div class="mt-2.5 pt-2 border-t border-outline-variant/60 flex items-center justify-between">
+<div>
+<div class="font-data-mono-sm text-[10px] text-outline uppercase">Revenue At Risk</div>
+<div class="font-data-mono-lg text-data-mono-lg font-bold text-error">₹18.4 Lakh</div>
+</div>
+<div class="text-right">
+<div class="font-data-mono-sm text-[10px] text-outline uppercase">AI Match</div>
+<div class="font-data-mono-sm text-data-mono-sm font-semibold text-secondary">96% Conf.</div>
+</div>
+</div>
+</div>
+<!-- Visual Lineage Flow Legend Overlay (Bottom Left) -->
+<div class="absolute bottom-4 left-4 bg-surface-container-lowest/90 backdrop-blur-sm border border-outline-variant p-3 rounded text-[11px] shadow-sm z-10 flex items-center gap-3">
+<span class="font-label-sm text-label-sm font-semibold text-on-surface">Lineage Flow:</span>
+<div class="flex items-center gap-1 text-on-surface-variant font-data-mono-sm text-[11px]">
+<span>Customer</span>
+<span class="material-symbols-outlined text-[13px] text-outline">arrow_forward</span>
+<span>Contract</span>
+<span class="material-symbols-outlined text-[13px] text-outline">arrow_forward</span>
+<span>Order</span>
+<span class="material-symbols-outlined text-[13px] text-outline">arrow_forward</span>
+<span>Invoice</span>
+<span class="material-symbols-outlined text-[13px] text-outline">arrow_forward</span>
+<span>Payment</span>
+<span class="material-symbols-outlined text-[13px] text-outline">arrow_forward</span>
+<span>Ledger</span>
+</div>
+<div class="h-3 w-[1px] bg-outline-variant mx-1"></div>
+<div class="flex items-center gap-1.5">
+<span class="w-2.5 h-2.5 rounded-full bg-error"></span>
+<span class="font-label-sm text-label-sm text-on-surface">Breached Path</span>
+</div>
+</div>
+</div>
+</main>
+<!-- RIGHT ACTIVE RISK DETAIL DRAWER (Open State for Risk #RR-10482) -->
+<aside class="w-[390px] h-full bg-surface-container-lowest border-l border-outline-variant flex flex-col justify-between shrink-0 z-30 shadow-lg">
+<!-- Drawer Header -->
+<div class="p-space-lg border-b border-outline-variant">
+<div class="flex items-center justify-between mb-2">
+<div class="flex items-center gap-2">
+<span class="px-2 py-0.5 rounded bg-error-container text-error font-label-sm text-label-sm font-bold border border-error/30">
+              SEVERITY: CRITICAL
+            </span>
+<span class="font-data-mono-sm text-data-mono-sm text-outline">TRACE ID: #RR-10482</span>
+</div>
+<button class="p-1 rounded text-outline-variant hover:text-on-surface hover:bg-surface-container-low transition-colors">
+<span class="material-symbols-outlined text-[18px]">close</span>
+</button>
+</div>
+<h2 class="font-headline-md text-headline-md font-bold text-on-surface tracking-tight">Pricing Anomaly Violation</h2>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-1">Invoice-to-contract discount mismatch detected against master pricing policy.</p>
+<!-- Risk Metric Summary Bar -->
+<div class="grid grid-cols-2 gap-space-sm mt-space-md">
+<div class="p-space-sm bg-surface-bright border border-outline-variant rounded">
+<div class="font-label-sm text-[10px] text-outline uppercase tracking-wider">Revenue Exposure</div>
+<div class="font-data-mono-lg text-data-mono-lg font-bold text-error mt-0.5">₹18,40,000</div>
+<div class="font-data-mono-sm text-[10px] text-error font-medium">Uncollected Leakage</div>
+</div>
+<div class="p-space-sm bg-surface-bright border border-outline-variant rounded">
+<div class="font-label-sm text-[10px] text-outline uppercase tracking-wider">AI Confidence &amp; Score</div>
+<div class="flex items-baseline gap-1.5 mt-0.5">
+<span class="font-data-mono-lg text-data-mono-lg font-bold text-on-surface">92</span>
+<span class="font-data-mono-sm text-data-mono-sm text-outline">/100</span>
+</div>
+<div class="font-data-mono-sm text-[10px] text-secondary font-semibold">96% Certainty Match</div>
+</div>
+</div>
+</div>
+<!-- Drawer Scrollable Content Area -->
+<div class="flex-1 overflow-y-auto custom-scrollbar p-space-lg space-y-space-lg">
+<!-- RevAI Graph Intelligence Insight Banner -->
+<div class="p-space-md bg-surface-container-low border border-secondary/40 rounded relative overflow-hidden">
+<div class="flex items-start gap-2.5">
+<span class="material-symbols-outlined text-secondary text-[20px] shrink-0 mt-0.5">auto_awesome</span>
+<div>
+<div class="font-headline-sm text-[12px] font-semibold text-secondary">RevAI Graph Intelligence Insight</div>
+<p class="font-body-sm text-body-sm text-on-surface mt-1 leading-relaxed">
+                RevAI detected a cluster concentration of revenue risk around enterprise renewal transactions created after the pricing-policy update on 14 September.
+              </p>
+</div>
+</div>
+</div>
+<!-- Primary Root Cause Analysis Card -->
+<div class="p-space-md bg-surface-bright border border-outline-variant rounded">
+<div class="flex items-center justify-between mb-2">
+<span class="font-label-sm text-label-sm font-semibold text-on-surface">Primary Root Cause</span>
+<span class="material-symbols-outlined text-[16px] text-error">policy</span>
+</div>
+<div class="p-2.5 bg-surface-container-lowest border border-error/30 rounded font-data-mono-sm text-data-mono-sm text-error bg-error-container/20 leading-relaxed font-semibold">
+            Invoice-to-contract discount mismatch (Policy max 10% vs Billed 18%)
+          </div>
+<div class="mt-2.5 space-y-1.5 text-[11px] font-body-sm">
+<div class="flex justify-between">
+<span class="text-on-surface-variant">Governing Contract:</span>
+<span class="font-data-mono-sm text-data-mono-sm text-on-surface font-semibold">CNT-88421 (Clause 4.2)</span>
+</div>
+<div class="flex justify-between">
+<span class="text-on-surface-variant">Billed Invoice:</span>
+<span class="font-data-mono-sm text-data-mono-sm text-on-surface font-semibold">INV-10282 (SAP ERP)</span>
+</div>
+<div class="flex justify-between">
+<span class="text-on-surface-variant">Policy Threshold:</span>
+<span class="font-data-mono-sm text-data-mono-sm text-on-surface font-semibold">CTRL-003 (≤ 10.0%)</span>
+</div>
+</div>
+</div>
+<!-- Cluster Impact Metrics Bento -->
+<div>
+<div class="font-label-sm text-label-sm font-semibold text-on-surface mb-2">Graph Cluster Metrics</div>
+<div class="grid grid-cols-2 gap-space-sm">
+<div class="p-2.5 bg-surface-bright border border-outline-variant rounded">
+<div class="font-data-mono-lg text-data-mono-lg font-bold text-on-surface">184</div>
+<div class="font-label-sm text-[11px] text-on-surface-variant mt-0.5">Related Transactions</div>
+</div>
+<div class="p-2.5 bg-surface-bright border border-outline-variant rounded">
+<div class="font-data-mono-lg text-data-mono-lg font-bold text-on-surface">27</div>
+<div class="font-label-sm text-[11px] text-on-surface-variant mt-0.5">Affected Customers</div>
+</div>
+<div class="p-2.5 bg-surface-bright border border-outline-variant rounded">
+<div class="font-data-mono-lg text-data-mono-lg font-bold text-on-surface">12</div>
+<div class="font-label-sm text-[11px] text-on-surface-variant mt-0.5">Evidence Artifacts</div>
+</div>
+<div class="p-2.5 bg-surface-bright border border-outline-variant rounded">
+<div class="font-data-mono-lg text-data-mono-lg font-bold text-on-surface">3</div>
+<div class="font-label-sm text-[11px] text-on-surface-variant mt-0.5">Controls Impacted</div>
+</div>
+</div>
+</div>
+<!-- Interconnected Lineage Nodes List -->
+<div>
+<div class="flex items-center justify-between mb-2">
+<span class="font-label-sm text-label-sm font-semibold text-on-surface">Direct Lineage Trace</span>
+<span class="font-data-mono-sm text-[10px] text-secondary">5 Linked Nodes</span>
+</div>
+<div class="space-y-1.5">
+<div class="flex items-center justify-between p-2 bg-surface-bright border border-outline-variant rounded text-[11px]">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-[15px] text-secondary">domain</span>
+<span class="font-headline-sm text-[11px] font-semibold text-on-surface">Acme Industries Corp</span>
+</div>
+<span class="font-data-mono-sm text-data-mono-sm text-outline">Party</span>
+</div>
+<div class="flex items-center justify-between p-2 bg-surface-bright border border-outline-variant rounded text-[11px]">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-[15px] text-secondary">description</span>
+<span class="font-headline-sm text-[11px] font-semibold text-on-surface">CNT-88421</span>
+</div>
+<span class="font-data-mono-sm text-data-mono-sm text-outline">Master Contract</span>
+</div>
+<div class="flex items-center justify-between p-2 bg-surface-bright border border-outline-variant rounded text-[11px]">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-[15px] text-error">receipt</span>
+<span class="font-headline-sm text-[11px] font-semibold text-on-surface">INV-10282</span>
+</div>
+<span class="font-data-mono-sm text-data-mono-sm text-error font-semibold">-8% Breach</span>
+</div>
+</div>
+</div>
+</div>
+<!-- DRAWER ACTION FOOTER (Primary CTA Row) -->
+<div class="p-space-lg border-t border-outline-variant bg-surface-bright flex flex-col gap-2">
+<div class="grid grid-cols-2 gap-2">
+<!-- Investigate in DNA -->
+<button class="flex items-center justify-center gap-1.5 py-2 px-2.5 bg-surface-container-lowest border border-outline hover:bg-surface-container-low text-on-surface rounded font-label-sm text-label-sm font-medium transition-colors">
+<span class="material-symbols-outlined text-[15px]">fingerprint</span>
+<span>Investigate in DNA</span>
+</button>
+<!-- View Evidence Chain -->
+<button class="flex items-center justify-center gap-1.5 py-2 px-2.5 bg-surface-container-lowest border border-outline hover:bg-surface-container-low text-on-surface rounded font-label-sm text-label-sm font-medium transition-colors">
+<span class="material-symbols-outlined text-[15px]">link</span>
+<span>Evidence Chain</span>
+</button>
+</div>
+<div class="grid grid-cols-2 gap-2">
+<!-- Create Audit Case -->
+<button class="flex items-center justify-center gap-1.5 py-2 px-2.5 bg-primary text-on-primary rounded font-label-sm text-label-sm font-semibold hover:bg-primary-container transition-all active:scale-[0.98]">
+<span class="material-symbols-outlined text-[15px]">assignment_add</span>
+<span>Create Audit Case</span>
+</button>
+<!-- Simulate Recovery -->
+<button class="flex items-center justify-center gap-1.5 py-2 px-2.5 bg-secondary text-on-secondary rounded font-label-sm text-label-sm font-semibold hover:bg-secondary-container transition-all active:scale-[0.98]">
+<span class="material-symbols-outlined text-[15px]">published_with_changes</span>
+<span>Simulate Recovery</span>
+</button>
+</div>
+</div>
+</aside>
+</div>
+</body></html>

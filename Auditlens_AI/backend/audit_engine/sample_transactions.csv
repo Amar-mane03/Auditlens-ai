@@ -1,0 +1,6 @@
+transaction_id,amount,customer_id,vendor_id,type,status,invoice_amount,tax_amount,discount,invoice_number,timestamp
+TXN-1001,12000.00,CUST-01,VEND-01,sale,completed,12000.00,2160.00,500.00,INV-1001,2026-03-15 11:20:00
+TXN-1002,100000.00,CUST-02,VEND-02,sale,completed,100000.00,18000.00,0.00,INV-1002,2026-03-31 23:45:00
+TXN-1003,5000.00,CUST-03,VEND-03,refund,completed,5000.00,900.00,0.00,INV-1003,2026-03-18 14:10:00
+TXN-1004,25000.00,CUST-01,VEND-01,sale,completed,30000.00,4500.00,16000.00,INV-1001,2026-03-20 03:30:00
+TXN-1005,-500.00,CUST-04,VEND-04,adjustment,completed,-500.00,0.00,0.00,INV-1005,2026-03-22 09:15:00

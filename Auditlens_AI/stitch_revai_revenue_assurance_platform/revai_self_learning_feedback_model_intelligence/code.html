@@ -1,0 +1,999 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>RevAI - Self-Learning Feedback &amp; Model Intelligence</title>
+<!-- Material Symbols Outlined -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Google Fonts: IBM Plex Sans & Inter -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&amp;family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS with Forms & Container Queries -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          "colors": {
+            "secondary-fixed-dim": "#b4c5ff",
+            "on-secondary-container": "#fefcff",
+            "surface-container-lowest": "#ffffff",
+            "on-tertiary-fixed-variant": "#5a00c6",
+            "outline-variant": "#c6c6cd",
+            "surface-container-low": "#eff4ff",
+            "surface-container": "#e5eeff",
+            "surface-bright": "#f8f9ff",
+            "on-tertiary": "#ffffff",
+            "tertiary-fixed": "#eaddff",
+            "tertiary-container": "#25005a",
+            "error": "#ba1a1a",
+            "secondary-container": "#316bf3",
+            "on-surface": "#0b1c30",
+            "surface-dim": "#cbdbf5",
+            "on-error": "#ffffff",
+            "on-primary-fixed": "#131b2e",
+            "on-tertiary-fixed": "#25005a",
+            "on-tertiary-container": "#9863ff",
+            "inverse-surface": "#213145",
+            "outline": "#76777d",
+            "tertiary": "#000000",
+            "secondary": "#0051d5",
+            "inverse-on-surface": "#eaf1ff",
+            "on-primary": "#ffffff",
+            "background": "#f8f9ff",
+            "on-secondary": "#ffffff",
+            "surface-tint": "#565e74",
+            "inverse-primary": "#bec6e0",
+            "on-primary-container": "#7c839b",
+            "secondary-fixed": "#dbe1ff",
+            "tertiary-fixed-dim": "#d2bbff",
+            "on-primary-fixed-variant": "#3f465c",
+            "primary-container": "#131b2e",
+            "surface-container-highest": "#d3e4fe",
+            "on-background": "#0b1c30",
+            "on-error-container": "#93000a",
+            "primary-fixed-dim": "#bec6e0",
+            "error-container": "#ffdad6",
+            "primary": "#000000",
+            "on-secondary-fixed": "#00174b",
+            "on-surface-variant": "#45464d",
+            "primary-fixed": "#dae2fd",
+            "surface-container-high": "#dce9ff",
+            "surface": "#f8f9ff",
+            "surface-variant": "#d3e4fe",
+            "on-secondary-fixed-variant": "#003ea8"
+          },
+          "borderRadius": {
+            "DEFAULT": "0.125rem",
+            "lg": "0.25rem",
+            "xl": "0.5rem",
+            "full": "0.75rem"
+          },
+          "spacing": {
+            "space-lg": "1rem",
+            "gutter": "1rem",
+            "space-xl": "1.5rem",
+            "space-2xl": "2rem",
+            "space-xxs": "0.125rem",
+            "margin": "1.5rem",
+            "space-sm": "0.5rem",
+            "space-xs": "0.25rem",
+            "space-md": "0.75rem"
+          },
+          "fontFamily": {
+            "headline-lg": ["IBM Plex Sans"],
+            "headline-xl": ["IBM Plex Sans"],
+            "body-sm": ["Inter"],
+            "data-mono-sm": ["IBM Plex Sans"],
+            "body-lg": ["Inter"],
+            "body-md": ["Inter"],
+            "data-mono-md": ["IBM Plex Sans"],
+            "data-mono-lg": ["IBM Plex Sans"],
+            "headline-sm": ["IBM Plex Sans"],
+            "headline-md": ["IBM Plex Sans"],
+            "label-md": ["IBM Plex Sans"],
+            "label-sm": ["IBM Plex Sans"]
+          },
+          "fontSize": {
+            "headline-lg": ["24px", { "lineHeight": "32px", "letterSpacing": "-0.015em", "fontWeight": "600" }],
+            "headline-xl": ["32px", { "lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "600" }],
+            "body-sm": ["12px", { "lineHeight": "16px", "letterSpacing": "0em", "fontWeight": "400" }],
+            "data-mono-sm": ["11px", { "lineHeight": "14px", "letterSpacing": "0.01em", "fontWeight": "500" }],
+            "body-lg": ["15px", { "lineHeight": "22px", "letterSpacing": "-0.005em", "fontWeight": "400" }],
+            "body-md": ["13px", { "lineHeight": "18px", "letterSpacing": "0em", "fontWeight": "400" }],
+            "data-mono-md": ["13px", { "lineHeight": "18px", "letterSpacing": "0em", "fontWeight": "500" }],
+            "data-mono-lg": ["18px", { "lineHeight": "24px", "letterSpacing": "-0.01em", "fontWeight": "600" }],
+            "headline-sm": ["16px", { "lineHeight": "24px", "letterSpacing": "-0.005em", "fontWeight": "600" }],
+            "headline-md": ["20px", { "lineHeight": "28px", "letterSpacing": "-0.01em", "fontWeight": "600" }],
+            "label-md": ["12px", { "lineHeight": "16px", "letterSpacing": "0.02em", "fontWeight": "600" }],
+            "label-sm": ["11px", { "lineHeight": "14px", "letterSpacing": "0.04em", "fontWeight": "600" }]
+          }
+        }
+      }
+    }
+  </script>
+<style>
+    .material-symbols-outlined {
+      font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 20;
+      font-size: 18px;
+      display: inline-block;
+      vertical-align: middle;
+    }
+    .custom-scrollbar::-webkit-scrollbar {
+      width: 4px;
+      height: 4px;
+    }
+    .custom-scrollbar::-webkit-scrollbar-thumb {
+      background: #c6c6cd;
+      border-radius: 2px;
+    }
+    .custom-scrollbar::-webkit-scrollbar-track {
+      background: transparent;
+    }
+  </style>
+</head>
+<body class="bg-background text-on-surface antialiased font-body-md text-body-md overflow-x-hidden">
+<!-- ========================================================================= -->
+<!-- LEFT SIDEBAR NAVIGATION (Shared Component: SideNavBar)                    -->
+<!-- ========================================================================= -->
+<aside class="fixed top-0 left-0 h-screen w-64 flex flex-col justify-between py-space-md px-space-xs border-r border-outline-variant bg-surface-container-lowest z-50">
+<div class="flex flex-col h-full overflow-hidden">
+<!-- Header / Logo & Workspace Status -->
+<div class="px-space-md pb-space-md border-b border-outline-variant flex flex-col gap-1">
+<div class="flex items-center gap-2">
+<div class="w-7 h-7 bg-primary flex items-center justify-center rounded">
+<span class="material-symbols-outlined text-on-primary text-base" data-icon="shield">shield</span>
+</div>
+<div>
+<div class="font-headline-sm text-headline-sm font-semibold text-on-surface tracking-tight leading-none">RevAI Revenue Assurance</div>
+<div class="font-label-sm text-label-sm text-on-surface-variant flex items-center gap-1.5 mt-1">
+<span class="inline-block w-1.5 h-1.5 rounded-full bg-secondary"></span>
+              Active · Self-learning v4.2.1
+            </div>
+</div>
+</div>
+<button class="mt-space-sm w-full py-1.5 px-space-sm bg-primary text-on-primary font-label-sm text-label-sm rounded hover:bg-on-surface-variant transition-colors flex items-center justify-center gap-1.5 shadow-sm active:scale-[0.99]">
+<span class="material-symbols-outlined text-xs" data-icon="sync">sync</span>
+          Run Live Reconciliation
+        </button>
+</div>
+<!-- Navigation Tabs (22 tabs from JSON Blueprint) -->
+<nav class="flex-1 overflow-y-auto custom-scrollbar py-space-sm px-1 space-y-0.5">
+<!-- Overview -->
+<a class="flex items-center gap-2.5 px-space-md py-1.5 rounded font-label-sm text-label-sm text-on-surface-variant hover:bg-surface-container-low hover:text-on-surface transition-colors active:scale-[0.99]" href="#">
+<span class="material-symbols-outlined text-on-surface-variant" data-icon="dashboard">dashboard</span>
+          Overview
+        </a>
+<!-- Revenue Risk Graph -->
+<a class="flex items-center gap-2.5 px-space-md py-1.5 rounded font-label-sm text-label-sm text-on-surface-variant hover:bg-surface-container-low hover:text-on-surface transition-colors active:scale-[0.99]" href="#">
+<span class="material-symbols-outlined text-on-surface-variant" data-icon="bubble_chart">bubble_chart</span>
+          Revenue Risk Graph
+        </a>
+<!-- Revenue Leak Radar -->
+<a class="flex items-center gap-2.5 px-space-md py-1.5 rounded font-label-sm text-label-sm text-on-surface-variant hover:bg-surface-container-low hover:text-on-surface transition-colors active:scale-[0.99]" href="#">
+<span class="material-symbols-outlined text-on-surface-variant" data-icon="radar">radar</span>
+          Revenue Leak Radar
+        </a>
+<!-- Transactions -->
+<a class="flex items-center gap-2.5 px-space-md py-1.5 rounded font-label-sm text-label-sm text-on-surface-variant hover:bg-surface-container-low hover:text-on-surface transition-colors active:scale-[0.99]" href="#">
+<span class="material-symbols-outlined text-on-surface-variant" data-icon="receipt_long">receipt_long</span>
+          Transactions
+        </a>
+<!-- Transaction DNA -->
+<a class="flex items-center gap-2.5 px-space-md py-1.5 rounded font-label-sm text-label-sm text-on-surface-variant hover:bg-surface-container-low hover:text-on-surface transition-colors active:scale-[0.99]" href="#">
+<span class="material-symbols-outlined text-on-surface-variant" data-icon="fingerprint">fingerprint</span>
+          Transaction DNA
+        </a>
+<!-- Revenue Timeline -->
+<a class="flex items-center gap-2.5 px-space-md py-1.5 rounded font-label-sm text-label-sm text-on-surface-variant hover:bg-surface-container-low hover:text-on-surface transition-colors active:scale-[0.99]" href="#">
+<span class="material-symbols-outlined text-on-surface-variant" data-icon="timeline">timeline</span>
+          Revenue Timeline
+        </a>
+<!-- AI Evidence Chain -->
+<a class="flex items-center gap-2.5 px-space-md py-1.5 rounded font-label-sm text-label-sm text-on-surface-variant hover:bg-surface-container-low hover:text-on-surface transition-colors active:scale-[0.99]" href="#">
+<span class="material-symbols-outlined text-on-surface-variant" data-icon="link">link</span>
+          AI Evidence Chain
+        </a>
+<!-- Audit Cases -->
+<a class="flex items-center gap-2.5 px-space-md py-1.5 rounded font-label-sm text-label-sm text-on-surface-variant hover:bg-surface-container-low hover:text-on-surface transition-colors active:scale-[0.99]" href="#">
+<span class="material-symbols-outlined text-on-surface-variant" data-icon="assignment">assignment</span>
+          Audit Cases
+        </a>
+<!-- Controls -->
+<a class="flex items-center gap-2.5 px-space-md py-1.5 rounded font-label-sm text-label-sm text-on-surface-variant hover:bg-surface-container-low hover:text-on-surface transition-colors active:scale-[0.99]" href="#">
+<span class="material-symbols-outlined text-on-surface-variant" data-icon="shield">shield</span>
+          Controls
+        </a>
+<!-- Findings -->
+<a class="flex items-center gap-2.5 px-space-md py-1.5 rounded font-label-sm text-label-sm text-on-surface-variant hover:bg-surface-container-low hover:text-on-surface transition-colors active:scale-[0.99]" href="#">
+<span class="material-symbols-outlined text-on-surface-variant" data-icon="fact_check">fact_check</span>
+          Findings
+        </a>
+<!-- Evidence Vault -->
+<a class="flex items-center gap-2.5 px-space-md py-1.5 rounded font-label-sm text-label-sm text-on-surface-variant hover:bg-surface-container-low hover:text-on-surface transition-colors active:scale-[0.99]" href="#">
+<span class="material-symbols-outlined text-on-surface-variant" data-icon="inventory_2">inventory_2</span>
+          Evidence Vault
+        </a>
+<div class="pt-2 pb-1 px-space-md">
+<span class="font-label-sm text-label-sm text-outline uppercase tracking-wider text-[10px]">AI Intelligence Core</span>
+</div>
+<!-- AI Insights -->
+<a class="flex items-center gap-2.5 px-space-md py-1.5 rounded font-label-sm text-label-sm text-on-surface-variant hover:bg-surface-container-low hover:text-on-surface transition-colors active:scale-[0.99]" href="#">
+<span class="material-symbols-outlined text-on-surface-variant" data-icon="auto_awesome">auto_awesome</span>
+          AI Insights
+        </a>
+<!-- Model Intelligence -->
+<a class="flex items-center gap-2.5 px-space-md py-1.5 rounded font-label-sm text-label-sm text-on-surface-variant hover:bg-surface-container-low hover:text-on-surface transition-colors active:scale-[0.99]" href="#">
+<span class="material-symbols-outlined text-on-surface-variant" data-icon="psychology">psychology</span>
+          Model Intelligence
+        </a>
+<!-- Self-Learning Feedback (ACTIVE TAB) -->
+<a class="flex items-center gap-2.5 px-space-md py-1.5 rounded bg-surface-container-high text-secondary border-l-2 border-secondary font-label-sm text-label-sm font-semibold active:scale-[0.99]" href="#">
+<span class="material-symbols-outlined text-secondary" data-icon="neurology" style="font-variation-settings: 'FILL' 1;">neurology</span>
+          Self-Learning Feedback
+        </a>
+<!-- AI Activity -->
+<a class="flex items-center gap-2.5 px-space-md py-1.5 rounded font-label-sm text-label-sm text-on-surface-variant hover:bg-surface-container-low hover:text-on-surface transition-colors active:scale-[0.99]" href="#">
+<span class="material-symbols-outlined text-on-surface-variant" data-icon="history">history</span>
+          AI Activity
+        </a>
+<div class="pt-2 pb-1 px-space-md">
+<span class="font-label-sm text-label-sm text-outline uppercase tracking-wider text-[10px]">Reporting &amp; Configuration</span>
+</div>
+<!-- Audit Reports -->
+<a class="flex items-center gap-2.5 px-space-md py-1.5 rounded font-label-sm text-label-sm text-on-surface-variant hover:bg-surface-container-low hover:text-on-surface transition-colors active:scale-[0.99]" href="#">
+<span class="material-symbols-outlined text-on-surface-variant" data-icon="summarize">summarize</span>
+          Audit Reports
+        </a>
+<!-- Revenue Reports -->
+<a class="flex items-center gap-2.5 px-space-md py-1.5 rounded font-label-sm text-label-sm text-on-surface-variant hover:bg-surface-container-low hover:text-on-surface transition-colors active:scale-[0.99]" href="#">
+<span class="material-symbols-outlined text-on-surface-variant" data-icon="analytics">analytics</span>
+          Revenue Reports
+        </a>
+<!-- Recovery Reports -->
+<a class="flex items-center gap-2.5 px-space-md py-1.5 rounded font-label-sm text-label-sm text-on-surface-variant hover:bg-surface-container-low hover:text-on-surface transition-colors active:scale-[0.99]" href="#">
+<span class="material-symbols-outlined text-on-surface-variant" data-icon="published_with_changes">published_with_changes</span>
+          Recovery Reports
+        </a>
+<!-- Export Center -->
+<a class="flex items-center gap-2.5 px-space-md py-1.5 rounded font-label-sm text-label-sm text-on-surface-variant hover:bg-surface-container-low hover:text-on-surface transition-colors active:scale-[0.99]" href="#">
+<span class="material-symbols-outlined text-on-surface-variant" data-icon="file_download">file_download</span>
+          Export Center
+        </a>
+<!-- Data Sources -->
+<a class="flex items-center gap-2.5 px-space-md py-1.5 rounded font-label-sm text-label-sm text-on-surface-variant hover:bg-surface-container-low hover:text-on-surface transition-colors active:scale-[0.99]" href="#">
+<span class="material-symbols-outlined text-on-surface-variant" data-icon="database">database</span>
+          Data Sources
+        </a>
+<!-- Rules & Controls -->
+<a class="flex items-center gap-2.5 px-space-md py-1.5 rounded font-label-sm text-label-sm text-on-surface-variant hover:bg-surface-container-low hover:text-on-surface transition-colors active:scale-[0.99]" href="#">
+<span class="material-symbols-outlined text-on-surface-variant" data-icon="rule">rule</span>
+          Rules &amp; Controls
+        </a>
+<!-- Settings -->
+<a class="flex items-center gap-2.5 px-space-md py-1.5 rounded font-label-sm text-label-sm text-on-surface-variant hover:bg-surface-container-low hover:text-on-surface transition-colors active:scale-[0.99]" href="#">
+<span class="material-symbols-outlined text-on-surface-variant" data-icon="settings">settings</span>
+          Settings
+        </a>
+</nav>
+<!-- Sidebar Footer -->
+<div class="px-space-md pt-space-sm border-t border-outline-variant space-y-1">
+<a class="flex items-center gap-2 px-1 py-1 font-label-sm text-label-sm text-on-surface-variant hover:text-on-surface transition-colors" href="#">
+<span class="material-symbols-outlined text-xs" data-icon="sync_alt">sync_alt</span>
+          Sync SAP/Salesforce
+        </a>
+<a class="flex items-center gap-2 px-1 py-1 font-label-sm text-label-sm text-on-surface-variant hover:text-on-surface transition-colors" href="#">
+<span class="material-symbols-outlined text-xs" data-icon="corporate_fare">corporate_fare</span>
+          Org Workspace
+        </a>
+<a class="flex items-center gap-2 px-1 py-1 font-label-sm text-label-sm text-on-surface-variant hover:text-on-surface transition-colors" href="#">
+<span class="material-symbols-outlined text-xs" data-icon="admin_panel_settings">admin_panel_settings</span>
+          Admin Console
+        </a>
+</div>
+</div>
+</aside>
+<!-- ========================================================================= -->
+<!-- MAIN WORKSPACE LAYOUT (Left offset for 64 / 256px sidebar)                 -->
+<!-- ========================================================================= -->
+<div class="ml-64 flex flex-col min-h-screen">
+<!-- ========================================================================= -->
+<!-- TOP APP BAR (Shared Component: TopNavBar)                                  -->
+<!-- ========================================================================= -->
+<header class="sticky top-0 z-40 flex justify-between items-center h-14 w-full px-space-lg bg-surface-container-lowest border-b border-outline-variant">
+<!-- Search on Left -->
+<div class="flex items-center gap-4 flex-1 max-w-lg">
+<div class="relative w-full">
+<span class="material-symbols-outlined absolute left-2.5 top-2 text-outline-variant text-base" data-icon="search">search</span>
+<input class="w-full h-8 pl-8 pr-3 text-body-sm font-body-sm bg-surface-bright border border-outline-variant rounded focus:border-secondary focus:ring-1 focus:ring-secondary focus:outline-none transition-all placeholder:text-outline-variant" placeholder="Search auditor calibrations, finding ID (#F-1022), drift vector, or model weights..." type="text"/>
+<kbd class="absolute right-2 top-1.5 font-data-mono-sm text-data-mono-sm text-outline bg-surface-container-low px-1.5 py-0.5 rounded border border-outline-variant">⌘K</kbd>
+</div>
+</div>
+<!-- Trailing Cluster -->
+<div class="flex items-center gap-3">
+<!-- Secondary Action: Audit Period -->
+<div class="flex items-center gap-1.5 px-2.5 py-1 bg-surface-container-low border border-outline-variant rounded font-data-mono-sm text-data-mono-sm text-on-surface">
+<span class="material-symbols-outlined text-secondary text-sm" data-icon="date_range">date_range</span>
+<span>Q3 FY2026 / 01 Jul - 30 Sep</span>
+<span class="material-symbols-outlined text-outline text-xs" data-icon="expand_more">expand_more</span>
+</div>
+<!-- Trailing Primary Action: Copilot / Ask RevAI -->
+<button class="h-8 px-3 bg-secondary text-on-secondary rounded font-label-sm text-label-sm flex items-center gap-1.5 hover:bg-secondary-container transition-all active:scale-[0.98]">
+<span class="material-symbols-outlined text-sm" data-icon="auto_awesome">auto_awesome</span>
+          Ask RevAI
+        </button>
+<div class="h-4 w-[1px] bg-outline-variant mx-0.5"></div>
+<!-- Trailing Icon Actions: notifications, help, sync -->
+<button class="w-8 h-8 flex items-center justify-center rounded text-on-surface-variant hover:bg-surface-container-low hover:text-on-surface transition-colors" title="Sync Status">
+<span class="material-symbols-outlined" data-icon="sync">sync</span>
+</button>
+<button class="w-8 h-8 relative flex items-center justify-center rounded text-on-surface-variant hover:bg-surface-container-low hover:text-on-surface transition-colors" title="Audit Notifications">
+<span class="material-symbols-outlined" data-icon="notifications">notifications</span>
+<span class="absolute top-1.5 right-1.5 w-2 h-2 bg-error rounded-full ring-2 ring-surface-container-lowest"></span>
+</button>
+<button class="w-8 h-8 flex items-center justify-center rounded text-on-surface-variant hover:bg-surface-container-low hover:text-on-surface transition-colors" title="System Documentation &amp; Help">
+<span class="material-symbols-outlined" data-icon="help">help</span>
+</button>
+<div class="h-4 w-[1px] bg-outline-variant mx-0.5"></div>
+<!-- Auditor Profile Avatar -->
+<div class="flex items-center gap-2 pl-1 cursor-pointer">
+<div class="w-8 h-8 rounded bg-primary-container text-inverse-on-surface flex items-center justify-center font-headline-sm text-xs font-bold border border-outline-variant" title="Chief Revenue Auditor Profile Avatar">
+            CA
+          </div>
+<div class="hidden xl:block text-left">
+<div class="font-label-sm text-label-sm text-on-surface leading-tight">Sarah Jenkins, CPA</div>
+<div class="font-data-mono-sm text-[10px] text-outline leading-tight">Chief Revenue Auditor</div>
+</div>
+</div>
+</div>
+</header>
+<!-- ========================================================================= -->
+<!-- CONTENT CANVAS                                                            -->
+<!-- ========================================================================= -->
+<main class="flex-1 p-space-lg space-y-space-lg">
+<!-- PAGE HEADER -->
+<section class="flex flex-col md:flex-row md:items-center justify-between gap-4 pb-space-sm border-b border-outline-variant">
+<div>
+<div class="flex items-center gap-2">
+<span class="px-2 py-0.5 bg-secondary-fixed text-on-secondary-fixed rounded font-label-sm text-label-sm tracking-wide">HUMAN-IN-THE-LOOP ACTIVE</span>
+<span class="font-data-mono-sm text-data-mono-sm text-outline">v4.2.1 • Latency: 42ms • Calibrated: 14m ago</span>
+</div>
+<h1 class="font-headline-xl text-headline-xl text-on-surface tracking-tight mt-1">Self-Learning Feedback &amp; Model Intelligence</h1>
+<p class="font-body-md text-body-md text-on-surface-variant mt-0.5">Improve detection quality and eliminate false positives using auditor decisions and investigation outcomes.</p>
+</div>
+<!-- Action CTAs Cluster -->
+<div class="flex flex-wrap items-center gap-2">
+<button class="h-8 px-3 bg-surface-container-lowest border border-outline-variant text-on-surface rounded font-label-sm text-label-sm hover:bg-surface-container-low transition-colors flex items-center gap-1.5 shadow-sm active:scale-[0.98]">
+<span class="material-symbols-outlined text-sm" data-icon="tune">tune</span>
+            Configure Human-in-the-Loop Thresholds
+          </button>
+<button class="h-8 px-3 bg-surface-container-lowest border border-outline-variant text-on-surface rounded font-label-sm text-label-sm hover:bg-surface-container-low transition-colors flex items-center gap-1.5 shadow-sm active:scale-[0.98]">
+<span class="material-symbols-outlined text-sm" data-icon="download">download</span>
+            Export Auditor Decision Matrix
+          </button>
+<button class="h-8 px-3.5 bg-primary text-on-primary rounded font-label-sm text-label-sm hover:bg-on-surface-variant transition-colors flex items-center gap-1.5 shadow active:scale-[0.98]">
+<span class="material-symbols-outlined text-sm text-secondary-fixed" data-icon="published_with_changes">published_with_changes</span>
+            Trigger Retraining Run (v4.2.2)
+          </button>
+</div>
+</section>
+<!-- TOP MODEL KPI METRICS CARDS (6 BENTO CARDS) -->
+<section class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-3">
+<!-- 1. Detection Accuracy -->
+<div class="bg-surface-container-lowest border border-outline-variant rounded p-space-md flex flex-col justify-between hover:border-outline transition-colors">
+<div class="flex items-center justify-between">
+<span class="font-label-sm text-label-sm text-on-surface-variant">Detection Accuracy</span>
+<span class="material-symbols-outlined text-outline text-base" data-icon="query_stats">query_stats</span>
+</div>
+<div class="my-1.5">
+<div class="font-data-mono-lg text-headline-md font-bold text-on-surface">92.8%</div>
+<div class="flex items-center gap-1 font-data-mono-sm text-[11px] text-[#065F46] mt-0.5">
+<span class="material-symbols-outlined text-xs" data-icon="trending_up">trending_up</span>
+              +1.4% this quarter
+            </div>
+</div>
+<div class="w-full bg-surface-container-low h-1 rounded-full overflow-hidden">
+<div class="bg-secondary h-full rounded-full" style="width: 92.8%"></div>
+</div>
+</div>
+<!-- 2. Model Precision -->
+<div class="bg-surface-container-lowest border border-outline-variant rounded p-space-md flex flex-col justify-between hover:border-outline transition-colors">
+<div class="flex items-center justify-between">
+<span class="font-label-sm text-label-sm text-on-surface-variant">Model Precision</span>
+<span class="material-symbols-outlined text-outline text-base" data-icon="precision_manufacturing">precision_manufacturing</span>
+</div>
+<div class="my-1.5">
+<div class="font-data-mono-lg text-headline-md font-bold text-on-surface">89.4%</div>
+<div class="font-body-sm text-[11px] text-on-surface-variant truncate mt-0.5" title="Revenue leakage identification">
+              Leakage identification
+            </div>
+</div>
+<div class="w-full bg-surface-container-low h-1 rounded-full overflow-hidden">
+<div class="bg-secondary h-full rounded-full" style="width: 89.4%"></div>
+</div>
+</div>
+<!-- 3. Model Recall -->
+<div class="bg-surface-container-lowest border border-outline-variant rounded p-space-md flex flex-col justify-between hover:border-outline transition-colors">
+<div class="flex items-center justify-between">
+<span class="font-label-sm text-label-sm text-on-surface-variant">Model Recall</span>
+<span class="material-symbols-outlined text-outline text-base" data-icon="target">target</span>
+</div>
+<div class="my-1.5">
+<div class="font-data-mono-lg text-headline-md font-bold text-on-surface">91.2%</div>
+<div class="font-body-sm text-[11px] text-on-surface-variant truncate mt-0.5" title="Statutory exception capture rate">
+              Exception capture rate
+            </div>
+</div>
+<div class="w-full bg-surface-container-low h-1 rounded-full overflow-hidden">
+<div class="bg-secondary h-full rounded-full" style="width: 91.2%"></div>
+</div>
+</div>
+<!-- 4. False-Positive Rate -->
+<div class="bg-surface-container-lowest border border-outline-variant rounded p-space-md flex flex-col justify-between hover:border-outline transition-colors">
+<div class="flex items-center justify-between">
+<span class="font-label-sm text-label-sm text-on-surface-variant">False-Positive Rate</span>
+<span class="material-symbols-outlined text-outline text-base" data-icon="filter_alt_off">filter_alt_off</span>
+</div>
+<div class="my-1.5">
+<div class="font-data-mono-lg text-headline-md font-bold text-[#991B1B]">4.7%</div>
+<div class="flex items-center gap-1 font-data-mono-sm text-[11px] text-[#065F46] mt-0.5">
+<span class="material-symbols-outlined text-xs" data-icon="trending_down">trending_down</span>
+              -2.1% feedback drop
+            </div>
+</div>
+<div class="w-full bg-surface-container-low h-1 rounded-full overflow-hidden">
+<div class="bg-[#DC2626] h-full rounded-full" style="width: 4.7%"></div>
+</div>
+</div>
+<!-- 5. Reviewer Agreement Rate -->
+<div class="bg-surface-container-lowest border border-outline-variant rounded p-space-md flex flex-col justify-between hover:border-outline transition-colors">
+<div class="flex items-center justify-between">
+<span class="font-label-sm text-label-sm text-on-surface-variant">Reviewer Consensus</span>
+<span class="material-symbols-outlined text-outline text-base" data-icon="handshake">handshake</span>
+</div>
+<div class="my-1.5">
+<div class="font-data-mono-lg text-headline-md font-bold text-on-surface">94.1%</div>
+<div class="font-body-sm text-[11px] text-on-surface-variant truncate mt-0.5">
+              Audit consensus score
+            </div>
+</div>
+<div class="w-full bg-surface-container-low h-1 rounded-full overflow-hidden">
+<div class="bg-[#065F46] h-full rounded-full" style="width: 94.1%"></div>
+</div>
+</div>
+<!-- 6. Feedback Volume -->
+<div class="bg-surface-container-lowest border border-outline-variant rounded p-space-md flex flex-col justify-between hover:border-outline transition-colors">
+<div class="flex items-center justify-between">
+<span class="font-label-sm text-label-sm text-on-surface-variant">Feedback Volume</span>
+<span class="material-symbols-outlined text-outline text-base" data-icon="dataset">dataset</span>
+</div>
+<div class="my-1.5">
+<div class="font-data-mono-lg text-headline-md font-bold text-secondary">1,482</div>
+<div class="font-body-sm text-[11px] text-on-surface-variant truncate mt-0.5">
+              Decisions incorporated
+            </div>
+</div>
+<div class="w-full bg-surface-container-low h-1 rounded-full overflow-hidden">
+<div class="bg-secondary-container h-full rounded-full" style="width: 82%"></div>
+</div>
+</div>
+</section>
+<!-- ========================================================================= -->
+<!-- INTERACTIVE VISUAL FEEDBACK LOOP CYCLE                                     -->
+<!-- ========================================================================= -->
+<section class="bg-surface-container-lowest border border-outline-variant rounded p-space-lg shadow-sm">
+<div class="flex flex-col sm:flex-row sm:items-center justify-between pb-3 border-b border-outline-variant gap-2">
+<div>
+<h2 class="font-headline-sm text-headline-sm text-on-surface font-semibold flex items-center gap-2">
+<span class="material-symbols-outlined text-secondary" data-icon="autorenew">autorenew</span>
+              Closed-Loop Autonomous Model Adaptation Pipeline
+            </h2>
+<p class="font-body-sm text-body-sm text-on-surface-variant">
+              Continuous weight adjustments driven by statutory auditor determinations and verified general ledger outcomes.
+            </p>
+</div>
+<div class="flex items-center gap-2">
+<span class="inline-flex items-center px-2 py-0.5 rounded text-[11px] font-data-mono-sm bg-[#ECFDF5] text-[#065F46] border border-[#6EE7B7]">
+              Pipeline State: Healthy &amp; Synchronized
+            </span>
+</div>
+</div>
+<!-- The Pipeline Steps Diagram -->
+<div class="pt-5 pb-2 overflow-x-auto custom-scrollbar">
+<div class="min-w-[980px] flex items-center justify-between relative">
+<!-- Step 1 -->
+<div class="flex-1 flex flex-col items-center group">
+<div class="w-10 h-10 rounded border border-outline-variant bg-surface-container-low flex items-center justify-center text-on-surface shadow-xs group-hover:border-secondary transition-all">
+<span class="material-symbols-outlined text-secondary" data-icon="radar">radar</span>
+</div>
+<div class="font-label-sm text-label-sm font-semibold text-on-surface mt-2 text-center">AI Anomaly Detection</div>
+<div class="font-data-mono-sm text-[11px] text-outline text-center mt-0.5">Sub-second scan across ERP/CRM</div>
+<div class="mt-1 px-1.5 py-0.5 rounded bg-surface-container text-on-surface-variant font-data-mono-sm text-[10px]">100% Volume</div>
+</div>
+<!-- Arrow 1 -->
+<div class="flex items-center px-2 text-outline-variant">
+<span class="material-symbols-outlined text-xl text-secondary animate-pulse" data-icon="arrow_forward">arrow_forward</span>
+</div>
+<!-- Step 2 -->
+<div class="flex-1 flex flex-col items-center group">
+<div class="w-10 h-10 rounded border border-outline-variant bg-surface-container-low flex items-center justify-center text-on-surface shadow-xs group-hover:border-secondary transition-all">
+<span class="material-symbols-outlined text-on-surface" data-icon="person_search">person_search</span>
+</div>
+<div class="font-label-sm text-label-sm font-semibold text-on-surface mt-2 text-center">Auditor Human Review</div>
+<div class="font-data-mono-sm text-[11px] text-outline text-center mt-0.5">Dual-signoff statutory review</div>
+<div class="mt-1 px-1.5 py-0.5 rounded bg-surface-container text-on-surface-variant font-data-mono-sm text-[10px]">Queue: 14 open</div>
+</div>
+<!-- Arrow 2 -->
+<div class="flex items-center px-2 text-outline-variant">
+<span class="material-symbols-outlined text-xl text-secondary" data-icon="arrow_forward">arrow_forward</span>
+</div>
+<!-- Step 3 -->
+<div class="flex-1 flex flex-col items-center group">
+<div class="w-10 h-10 rounded border border-secondary bg-surface-container-high flex items-center justify-center text-secondary shadow-xs">
+<span class="material-symbols-outlined" data-icon="rule">rule</span>
+</div>
+<div class="font-label-sm text-label-sm font-semibold text-secondary mt-2 text-center">Accept / Reject / Calibrate</div>
+<div class="font-data-mono-sm text-[11px] text-outline text-center mt-0.5">Classification with reason vector</div>
+<div class="mt-1 px-1.5 py-0.5 rounded bg-[#EFF6FF] text-[#1E40AF] font-data-mono-sm text-[10px] border border-[#BFDBFE]">Human In Loop</div>
+</div>
+<!-- Arrow 3 -->
+<div class="flex items-center px-2 text-outline-variant">
+<span class="material-symbols-outlined text-xl text-secondary" data-icon="arrow_forward">arrow_forward</span>
+</div>
+<!-- Step 4 -->
+<div class="flex-1 flex flex-col items-center group">
+<div class="w-10 h-10 rounded border border-outline-variant bg-surface-container-low flex items-center justify-center text-on-surface shadow-xs group-hover:border-secondary transition-all">
+<span class="material-symbols-outlined text-on-surface" data-icon="verified">verified</span>
+</div>
+<div class="font-label-sm text-label-sm font-semibold text-on-surface mt-2 text-center">Outcome Verification</div>
+<div class="font-data-mono-sm text-[11px] text-outline text-center mt-0.5">GL credit memo / dispute entry</div>
+<div class="mt-1 px-1.5 py-0.5 rounded bg-surface-container text-on-surface-variant font-data-mono-sm text-[10px]">ERP Settled</div>
+</div>
+<!-- Arrow 4 -->
+<div class="flex items-center px-2 text-outline-variant">
+<span class="material-symbols-outlined text-xl text-secondary" data-icon="arrow_forward">arrow_forward</span>
+</div>
+<!-- Step 5 -->
+<div class="flex-1 flex flex-col items-center group">
+<div class="w-10 h-10 rounded border border-outline-variant bg-surface-container-low flex items-center justify-center text-on-surface shadow-xs group-hover:border-secondary transition-all">
+<span class="material-symbols-outlined text-on-surface" data-icon="electric_bolt">electric_bolt</span>
+</div>
+<div class="font-label-sm text-label-sm font-semibold text-on-surface mt-2 text-center">Retraining Signal Generated</div>
+<div class="font-data-mono-sm text-[11px] text-outline text-center mt-0.5">Loss gradient calculation</div>
+<div class="mt-1 px-1.5 py-0.5 rounded bg-surface-container text-on-surface-variant font-data-mono-sm text-[10px]">+1,482 Tensors</div>
+</div>
+<!-- Arrow 5 -->
+<div class="flex items-center px-2 text-outline-variant">
+<span class="material-symbols-outlined text-xl text-secondary" data-icon="arrow_forward">arrow_forward</span>
+</div>
+<!-- Step 6 -->
+<div class="flex-1 flex flex-col items-center group">
+<div class="w-10 h-10 rounded border border-outline-variant bg-surface-container-low flex items-center justify-center text-on-surface shadow-xs group-hover:border-secondary transition-all">
+<span class="material-symbols-outlined text-on-surface" data-icon="balance">balance</span>
+</div>
+<div class="font-label-sm text-label-sm font-semibold text-on-surface mt-2 text-center">Model Weight Calibration</div>
+<div class="font-data-mono-sm text-[11px] text-outline text-center mt-0.5">Rule threshold auto-shift</div>
+<div class="mt-1 px-1.5 py-0.5 rounded bg-surface-container text-on-surface-variant font-data-mono-sm text-[10px]">Δw = -0.042</div>
+</div>
+<!-- Arrow 6 -->
+<div class="flex items-center px-2 text-outline-variant">
+<span class="material-symbols-outlined text-xl text-secondary" data-icon="arrow_forward">arrow_forward</span>
+</div>
+<!-- Step 7 -->
+<div class="flex-1 flex flex-col items-center group">
+<div class="w-10 h-10 rounded border border-[#6EE7B7] bg-[#ECFDF5] flex items-center justify-center text-[#065F46] shadow-xs">
+<span class="material-symbols-outlined" data-icon="trending_up">trending_up</span>
+</div>
+<div class="font-label-sm text-label-sm font-semibold text-[#065F46] mt-2 text-center">Improved Precision</div>
+<div class="font-data-mono-sm text-[11px] text-[#065F46] text-center mt-0.5">92.8% Target Validated</div>
+<div class="mt-1 px-1.5 py-0.5 rounded bg-[#ECFDF5] text-[#065F46] font-data-mono-sm text-[10px] border border-[#6EE7B7]">v4.2.2 Ready</div>
+</div>
+</div>
+</div>
+</section>
+<!-- ========================================================================= -->
+<!-- AUDITOR DECISION FEEDBACK LOG TABLE                                       -->
+<!-- ========================================================================= -->
+<section class="bg-surface-container-lowest border border-outline-variant rounded shadow-sm overflow-hidden">
+<div class="p-space-md border-b border-outline-variant flex flex-col md:flex-row md:items-center justify-between gap-3">
+<div>
+<h2 class="font-headline-sm text-headline-sm text-on-surface font-semibold flex items-center gap-2">
+<span class="material-symbols-outlined text-on-surface" data-icon="fact_check">fact_check</span>
+              Auditor Decision Feedback Log
+            </h2>
+<p class="font-body-sm text-body-sm text-on-surface-variant">
+              Live ledger of statutory review decisions mapped to active neural network training vectors.
+            </p>
+</div>
+<div class="flex items-center gap-2">
+<div class="flex items-center gap-1.5 px-2.5 py-1 bg-surface-bright border border-outline-variant rounded font-data-mono-sm text-data-mono-sm">
+<span class="text-outline">Filter by Signal:</span>
+<span class="font-semibold text-on-surface">All Signals</span>
+<span class="material-symbols-outlined text-xs text-outline" data-icon="keyboard_arrow_down">keyboard_arrow_down</span>
+</div>
+<button class="h-7 px-2.5 bg-surface-container-low border border-outline-variant rounded font-label-sm text-label-sm text-on-surface hover:bg-surface-container transition-colors flex items-center gap-1">
+<span class="material-symbols-outlined text-xs" data-icon="refresh">refresh</span>
+              Auto-Sync Active
+            </button>
+</div>
+</div>
+<!-- Table Container -->
+<div class="overflow-x-auto">
+<table class="w-full text-left border-collapse">
+<thead>
+<tr class="h-9 bg-[#F1F5F9] border-b border-[#CBD5E1] font-label-sm text-[11px] text-[#475569] tracking-wider uppercase">
+<th class="px-space-md font-semibold">Finding ID</th>
+<th class="px-space-md font-semibold">Leak Type</th>
+<th class="px-space-md font-semibold">AI Initial Decision</th>
+<th class="px-space-md font-semibold">Reviewer Final Decision</th>
+<th class="px-space-md font-semibold">Divergence Reason</th>
+<th class="px-space-md font-semibold">Training Signal Generated</th>
+<th class="px-space-md font-semibold">Status</th>
+<th class="px-space-md font-semibold text-right">Inspect</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-[#F1F5F9] font-body-sm text-body-sm">
+<!-- Finding 1: #F-1022 -->
+<tr class="h-10 hover:bg-[#F8FAFC] transition-colors border-l-2 border-[#DC2626]">
+<td class="px-space-md whitespace-nowrap">
+<span class="font-data-mono-md text-data-mono-md font-semibold text-secondary">#F-1022</span>
+</td>
+<td class="px-space-md font-medium text-on-surface whitespace-nowrap">
+                  Underbilling
+                </td>
+<td class="px-space-md whitespace-nowrap">
+<span class="inline-flex items-center gap-1 px-2 py-0.5 rounded text-[11px] font-data-mono-sm bg-[#FFF7ED] text-[#9A3412] border border-[#FDBA74]">
+<span class="w-1.5 h-1.5 rounded-full bg-[#9A3412]"></span>
+                    High Risk (96%)
+                  </span>
+</td>
+<td class="px-space-md whitespace-nowrap">
+<span class="inline-flex items-center gap-1 px-2 py-0.5 rounded text-[11px] font-label-sm bg-[#FEF2F2] text-[#991B1B] border border-[#F87171] font-semibold">
+<span class="material-symbols-outlined text-xs" data-icon="gavel">gavel</span>
+                    Confirmed Leakage
+                  </span>
+</td>
+<td class="px-space-md text-on-surface-variant max-w-xs truncate" title="Unauthorized discount confirmed">
+                  Unauthorized discount confirmed
+                </td>
+<td class="px-space-md whitespace-nowrap">
+<span class="inline-flex items-center gap-1 px-2 py-0.5 rounded text-[11px] font-data-mono-sm bg-[#EFF6FF] text-[#1E40AF] border border-[#BFDBFE]">
+<span class="material-symbols-outlined text-xs" data-icon="add_circle">add_circle</span>
+                    True Positive Reinforcement
+                  </span>
+</td>
+<td class="px-space-md whitespace-nowrap">
+<span class="inline-flex items-center gap-1 px-2 py-0.5 rounded text-[11px] font-label-sm bg-[#ECFDF5] text-[#065F46] border border-[#6EE7B7]">
+<span class="material-symbols-outlined text-xs" data-icon="check_circle">check_circle</span>
+                    Model Updated
+                  </span>
+</td>
+<td class="px-space-md text-right whitespace-nowrap">
+<button class="h-6 px-2 bg-surface-container-lowest border border-outline-variant hover:border-secondary rounded text-[11px] font-label-sm text-secondary transition-colors inline-flex items-center gap-1">
+                    DNA Trace
+                    <span class="material-symbols-outlined text-xs" data-icon="chevron_right">chevron_right</span>
+</button>
+</td>
+</tr>
+<!-- Finding 2: #F-1018 -->
+<tr class="h-10 hover:bg-[#F8FAFC] transition-colors border-l-2 border-[#2563EB]">
+<td class="px-space-md whitespace-nowrap">
+<span class="font-data-mono-md text-data-mono-md font-semibold text-secondary">#F-1018</span>
+</td>
+<td class="px-space-md font-medium text-on-surface whitespace-nowrap">
+                  Duplicate Refund
+                </td>
+<td class="px-space-md whitespace-nowrap">
+<span class="inline-flex items-center gap-1 px-2 py-0.5 rounded text-[11px] font-data-mono-sm bg-[#FEF2F2] text-[#991B1B] border border-[#F87171]">
+<span class="w-1.5 h-1.5 rounded-full bg-[#991B1B]"></span>
+                    Critical Risk (94%)
+                  </span>
+</td>
+<td class="px-space-md whitespace-nowrap">
+<span class="inline-flex items-center gap-1 px-2 py-0.5 rounded text-[11px] font-label-sm bg-[#ECFDF5] text-[#065F46] border border-[#6EE7B7] font-semibold">
+<span class="material-symbols-outlined text-xs" data-icon="check_circle_outline">check_circle_outline</span>
+                    Legitimate Credit
+                  </span>
+</td>
+<td class="px-space-md text-on-surface-variant max-w-xs truncate" title="Approved SLA penalty waiver">
+                  Approved SLA penalty waiver
+                </td>
+<td class="px-space-md whitespace-nowrap">
+<span class="inline-flex items-center gap-1 px-2 py-0.5 rounded text-[11px] font-data-mono-sm bg-[#FFFBEB] text-[#92400E] border border-[#FCD34D]">
+<span class="material-symbols-outlined text-xs" data-icon="tune">tune</span>
+                    False Positive Calibration (Rule Exemption Learned)
+                  </span>
+</td>
+<td class="px-space-md whitespace-nowrap">
+<span class="inline-flex items-center gap-1 px-2 py-0.5 rounded text-[11px] font-label-sm bg-[#EFF6FF] text-[#1E40AF] border border-[#BFDBFE]">
+<span class="material-symbols-outlined text-xs" data-icon="sync">sync</span>
+                    Calibrated
+                  </span>
+</td>
+<td class="px-space-md text-right whitespace-nowrap">
+<button class="h-6 px-2 bg-surface-container-lowest border border-outline-variant hover:border-secondary rounded text-[11px] font-label-sm text-secondary transition-colors inline-flex items-center gap-1">
+                    DNA Trace
+                    <span class="material-symbols-outlined text-xs" data-icon="chevron_right">chevron_right</span>
+</button>
+</td>
+</tr>
+<!-- Finding 3: #F-1009 -->
+<tr class="h-10 hover:bg-[#F8FAFC] transition-colors border-l-2 border-[#F59E0B]">
+<td class="px-space-md whitespace-nowrap">
+<span class="font-data-mono-md text-data-mono-md font-semibold text-secondary">#F-1009</span>
+</td>
+<td class="px-space-md font-medium text-on-surface whitespace-nowrap">
+                  Revenue Recognition
+                </td>
+<td class="px-space-md whitespace-nowrap">
+<span class="inline-flex items-center gap-1 px-2 py-0.5 rounded text-[11px] font-data-mono-sm bg-[#FFFBEB] text-[#92400E] border border-[#FCD34D]">
+<span class="w-1.5 h-1.5 rounded-full bg-[#92400E]"></span>
+                    Medium Risk (81%)
+                  </span>
+</td>
+<td class="px-space-md whitespace-nowrap">
+<span class="inline-flex items-center gap-1 px-2 py-0.5 rounded text-[11px] font-label-sm bg-[#FFF7ED] text-[#9A3412] border border-[#FDBA74] font-semibold">
+<span class="material-symbols-outlined text-xs" data-icon="priority_high">priority_high</span>
+                    Modified Severity to High
+                  </span>
+</td>
+<td class="px-space-md text-on-surface-variant max-w-xs truncate" title="Multi-element contract unbundling">
+                  Multi-element contract unbundling
+                </td>
+<td class="px-space-md whitespace-nowrap">
+<span class="inline-flex items-center gap-1 px-2 py-0.5 rounded text-[11px] font-data-mono-sm bg-[#F5F3FF] text-[#5B21B6] border border-[#DDD6FE]">
+<span class="material-symbols-outlined text-xs" data-icon="linear_scale">linear_scale</span>
+                    Boundary Adjustment
+                  </span>
+</td>
+<td class="px-space-md whitespace-nowrap">
+<span class="inline-flex items-center gap-1 px-2 py-0.5 rounded text-[11px] font-label-sm bg-[#ECFDF5] text-[#065F46] border border-[#6EE7B7]">
+<span class="material-symbols-outlined text-xs" data-icon="deployed_code">deployed_code</span>
+                    Deployed
+                  </span>
+</td>
+<td class="px-space-md text-right whitespace-nowrap">
+<button class="h-6 px-2 bg-surface-container-lowest border border-outline-variant hover:border-secondary rounded text-[11px] font-label-sm text-secondary transition-colors inline-flex items-center gap-1">
+                    DNA Trace
+                    <span class="material-symbols-outlined text-xs" data-icon="chevron_right">chevron_right</span>
+</button>
+</td>
+</tr>
+<!-- Finding 4: #F-0994 -->
+<tr class="h-10 hover:bg-[#F8FAFC] transition-colors border-l-2 border-[#DC2626]">
+<td class="px-space-md whitespace-nowrap">
+<span class="font-data-mono-md text-data-mono-md font-semibold text-secondary">#F-0994</span>
+</td>
+<td class="px-space-md font-medium text-on-surface whitespace-nowrap">
+                  Contract Mismatch
+                </td>
+<td class="px-space-md whitespace-nowrap">
+<span class="inline-flex items-center gap-1 px-2 py-0.5 rounded text-[11px] font-data-mono-sm bg-[#FFF7ED] text-[#9A3412] border border-[#FDBA74]">
+<span class="w-1.5 h-1.5 rounded-full bg-[#9A3412]"></span>
+                    High Risk (88%)
+                  </span>
+</td>
+<td class="px-space-md whitespace-nowrap">
+<span class="inline-flex items-center gap-1 px-2 py-0.5 rounded text-[11px] font-label-sm bg-[#FEF2F2] text-[#991B1B] border border-[#F87171] font-semibold">
+<span class="material-symbols-outlined text-xs" data-icon="gavel">gavel</span>
+                    Confirmed Leakage
+                  </span>
+</td>
+<td class="px-space-md text-on-surface-variant max-w-xs truncate" title="Unbilled indexing fee">
+                  Unbilled indexing fee
+                </td>
+<td class="px-space-md whitespace-nowrap">
+<span class="inline-flex items-center gap-1 px-2 py-0.5 rounded text-[11px] font-data-mono-sm bg-[#EFF6FF] text-[#1E40AF] border border-[#BFDBFE]">
+<span class="material-symbols-outlined text-xs" data-icon="add_circle">add_circle</span>
+                    True Positive Reinforcement
+                  </span>
+</td>
+<td class="px-space-md whitespace-nowrap">
+<span class="inline-flex items-center gap-1 px-2 py-0.5 rounded text-[11px] font-label-sm bg-[#ECFDF5] text-[#065F46] border border-[#6EE7B7]">
+<span class="material-symbols-outlined text-xs" data-icon="check_circle">check_circle</span>
+                    Model Updated
+                  </span>
+</td>
+<td class="px-space-md text-right whitespace-nowrap">
+<button class="h-6 px-2 bg-surface-container-lowest border border-outline-variant hover:border-secondary rounded text-[11px] font-label-sm text-secondary transition-colors inline-flex items-center gap-1">
+                    DNA Trace
+                    <span class="material-symbols-outlined text-xs" data-icon="chevron_right">chevron_right</span>
+</button>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<!-- Table Footer / Ledger Navigation -->
+<div class="p-space-sm px-space-md bg-surface-bright border-t border-outline-variant flex items-center justify-between text-xs font-data-mono-sm text-on-surface-variant">
+<div>Showing 4 of 1,482 calibrated decisions incorporated in current weights (Run #REV-9821)</div>
+<div class="flex items-center gap-2">
+<button class="px-2 py-0.5 bg-surface-container-lowest border border-outline-variant rounded hover:bg-surface-container-low transition-colors disabled:opacity-50" disabled="">Previous</button>
+<span class="font-semibold text-on-surface">Page 1 of 371</span>
+<button class="px-2 py-0.5 bg-surface-container-lowest border border-outline-variant rounded hover:bg-surface-container-low transition-colors">Next</button>
+</div>
+</div>
+</section>
+<!-- ========================================================================= -->
+<!-- MODEL DRIFT & ANOMALY PATTERN EVOLUTION PANEL                              -->
+<!-- ========================================================================= -->
+<section class="grid grid-cols-1 lg:grid-cols-3 gap-space-lg">
+<!-- Trend 1: 90-Day Risk Distribution Shift -->
+<div class="bg-surface-container-lowest border border-outline-variant rounded p-space-md shadow-sm flex flex-col justify-between">
+<div>
+<div class="flex items-center justify-between pb-2 border-b border-outline-variant">
+<div>
+<h3 class="font-label-md text-label-md font-semibold text-on-surface">Risk Distribution Shift</h3>
+<p class="font-data-mono-sm text-[11px] text-outline">90-Day Anomaly Classification Re-weighting</p>
+</div>
+<span class="material-symbols-outlined text-secondary" data-icon="stacked_bar_chart">stacked_bar_chart</span>
+</div>
+<div class="pt-3 space-y-2.5">
+<div>
+<div class="flex justify-between font-label-sm text-label-sm mb-1">
+<span class="text-on-surface font-medium">Critical / Definite Leakage</span>
+<span class="font-data-mono-sm text-data-mono-sm font-semibold text-[#991B1B]">14.2% (-3.8% calibrated)</span>
+</div>
+<div class="w-full bg-surface-container-low h-2 rounded overflow-hidden">
+<div class="bg-[#DC2626] h-full" style="width: 14.2%"></div>
+</div>
+</div>
+<div>
+<div class="flex justify-between font-label-sm text-label-sm mb-1">
+<span class="text-on-surface font-medium">High Probability Exceptions</span>
+<span class="font-data-mono-sm text-data-mono-sm font-semibold text-[#9A3412]">28.6% (+1.1%)</span>
+</div>
+<div class="w-full bg-surface-container-low h-2 rounded overflow-hidden">
+<div class="bg-[#F97316] h-full" style="width: 28.6%"></div>
+</div>
+</div>
+<div>
+<div class="flex justify-between font-label-sm text-label-sm mb-1">
+<span class="text-on-surface font-medium">Medium Severity Boundary Cases</span>
+<span class="font-data-mono-sm text-data-mono-sm font-semibold text-[#92400E]">38.1% (+4.2%)</span>
+</div>
+<div class="w-full bg-surface-container-low h-2 rounded overflow-hidden">
+<div class="bg-[#FBBF24] h-full" style="width: 38.1%"></div>
+</div>
+</div>
+<div>
+<div class="flex justify-between font-label-sm text-label-sm mb-1">
+<span class="text-on-surface font-medium">Auto-Suppressed False Positives</span>
+<span class="font-data-mono-sm text-data-mono-sm font-semibold text-[#065F46]">19.1% (-1.5%)</span>
+</div>
+<div class="w-full bg-surface-container-low h-2 rounded overflow-hidden">
+<div class="bg-[#10B981] h-full" style="width: 19.1%"></div>
+</div>
+</div>
+</div>
+</div>
+<div class="mt-4 pt-2 border-t border-outline-variant flex items-center justify-between font-data-mono-sm text-[11px] text-outline">
+<span>Baseline: Q2 FY2026 Audit Finish</span>
+<span class="text-secondary font-semibold">Model Drift Index: 0.018 (Stable)</span>
+</div>
+</div>
+<!-- Trend 2: Model Confidence Drift (90 Days) -->
+<div class="bg-surface-container-lowest border border-outline-variant rounded p-space-md shadow-sm flex flex-col justify-between">
+<div>
+<div class="flex items-center justify-between pb-2 border-b border-outline-variant">
+<div>
+<h3 class="font-label-md text-label-md font-semibold text-on-surface">Confidence Drift Trajectory</h3>
+<p class="font-data-mono-sm text-[11px] text-outline">Decision boundary sharpness over last 90 days</p>
+</div>
+<span class="material-symbols-outlined text-secondary" data-icon="ssid_chart">ssid_chart</span>
+</div>
+<!-- Stylized CSS Sparkline / Trajectory Grid -->
+<div class="pt-3">
+<div class="flex items-end justify-between h-24 pt-4 px-2 border-b border-outline-variant bg-surface-bright rounded">
+<div class="w-2 bg-secondary-fixed rounded-t" style="height: 60%" title="Day 10: 84.1%"></div>
+<div class="w-2 bg-secondary-fixed rounded-t" style="height: 62%" title="Day 20: 84.9%"></div>
+<div class="w-2 bg-secondary-fixed rounded-t" style="height: 65%" title="Day 30: 86.0%"></div>
+<div class="w-2 bg-secondary-fixed rounded-t" style="height: 68%" title="Day 40: 87.2%"></div>
+<div class="w-2 bg-secondary-fixed rounded-t" style="height: 72%" title="Day 50: 88.5%"></div>
+<div class="w-2 bg-secondary-fixed rounded-t" style="height: 74%" title="Day 60: 89.1%"></div>
+<div class="w-2 bg-secondary rounded-t" style="height: 80%" title="Day 70: 90.4%"></div>
+<div class="w-2 bg-secondary rounded-t" style="height: 84%" title="Day 80: 91.8%"></div>
+<div class="w-2 bg-secondary rounded-t" style="height: 89%" title="Day 90: 92.8%"></div>
+</div>
+<div class="flex justify-between font-data-mono-sm text-[10px] text-outline px-1 mt-1.5">
+<span>Day 1 (84.1%)</span>
+<span>Day 45 (88.0%)</span>
+<span class="text-secondary font-bold">Current (92.8%)</span>
+</div>
+</div>
+<p class="font-body-sm text-[12px] text-on-surface-variant mt-2 leading-relaxed">
+              Confidence entropy decreased by <span class="font-semibold text-on-surface">34.2%</span> following auditor feedback inputs on multi-entity revenue unbundling rules.
+            </p>
+</div>
+<div class="mt-2 pt-2 border-t border-outline-variant flex items-center justify-between font-data-mono-sm text-[11px] text-outline">
+<span>Variance Threshold: ±0.05</span>
+<span class="text-[#065F46] font-semibold">Loss Minimized</span>
+</div>
+</div>
+<!-- Newly Emerged Anomaly Patterns -->
+<div class="bg-surface-container-lowest border border-outline-variant rounded p-space-md shadow-sm flex flex-col justify-between">
+<div>
+<div class="flex items-center justify-between pb-2 border-b border-outline-variant">
+<div>
+<h3 class="font-label-md text-label-md font-semibold text-on-surface">Newly Emerged Patterns</h3>
+<p class="font-data-mono-sm text-[11px] text-outline">Clustered anomalies requiring auditor rules</p>
+</div>
+<span class="material-symbols-outlined text-secondary" data-icon="scatter_plot">scatter_plot</span>
+</div>
+<div class="pt-3 space-y-2">
+<!-- Pattern 1 -->
+<div class="p-2 border border-outline-variant rounded bg-surface-bright flex flex-col gap-1 hover:border-secondary transition-colors cursor-pointer">
+<div class="flex items-center justify-between">
+<span class="font-label-sm text-label-sm font-semibold text-on-surface">SaaS Add-on prorated refund anomalies</span>
+<span class="px-1.5 py-0.5 rounded text-[10px] font-data-mono-sm bg-[#FEF2F2] text-[#991B1B] font-bold">NEW CLUSTER</span>
+</div>
+<div class="font-data-mono-sm text-[11px] text-on-surface-variant flex items-center justify-between">
+<span>84 Instances • $412,800 Exposure</span>
+<span class="text-secondary font-semibold">Review Pending</span>
+</div>
+</div>
+<!-- Pattern 2 -->
+<div class="p-2 border border-outline-variant rounded bg-surface-bright flex flex-col gap-1 hover:border-secondary transition-colors cursor-pointer">
+<div class="flex items-center justify-between">
+<span class="font-label-sm text-label-sm font-semibold text-on-surface">Mid-Contract Tier Downgrades</span>
+<span class="px-1.5 py-0.5 rounded text-[10px] font-data-mono-sm bg-[#FFF7ED] text-[#9A3412] font-bold">ALERT</span>
+</div>
+<div class="font-data-mono-sm text-[11px] text-on-surface-variant flex items-center justify-between">
+<span>39 Instances • $184,200 Exposure</span>
+<span class="text-[#065F46] font-semibold">62% Calibrated</span>
+</div>
+</div>
+<!-- Pattern 3 -->
+<div class="p-2 border border-outline-variant rounded bg-surface-bright flex flex-col gap-1 hover:border-secondary transition-colors cursor-pointer">
+<div class="flex items-center justify-between">
+<span class="font-label-sm text-label-sm font-semibold text-on-surface">FX Cross-Currency Triangulation Rounding</span>
+<span class="px-1.5 py-0.5 rounded text-[10px] font-data-mono-sm bg-[#EFF6FF] text-[#1E40AF] font-bold">LEARNED</span>
+</div>
+<div class="font-data-mono-sm text-[11px] text-on-surface-variant flex items-center justify-between">
+<span>142 Instances • $18,450 Exposure</span>
+<span class="text-[#065F46] font-semibold">Auto-Exempt</span>
+</div>
+</div>
+</div>
+</div>
+<div class="mt-2 pt-2 border-t border-outline-variant flex items-center justify-between font-data-mono-sm text-[11px]">
+<a class="text-secondary hover:underline font-semibold flex items-center gap-1" href="#">
+              Analyze all 8 cluster vectors
+              <span class="material-symbols-outlined text-xs" data-icon="north_east">north_east</span>
+</a>
+</div>
+</div>
+</section>
+<!-- AUDIT RE-TRAINING CONTROL DRAWER CALLOUT -->
+<section class="bg-primary-container text-inverse-on-surface border border-outline rounded p-space-md flex flex-col md:flex-row md:items-center justify-between gap-4">
+<div class="flex items-start gap-3">
+<div class="w-9 h-9 rounded bg-secondary flex items-center justify-center text-on-secondary shrink-0 mt-0.5">
+<span class="material-symbols-outlined" data-icon="psychology">psychology</span>
+</div>
+<div>
+<div class="flex items-center gap-2">
+<span class="font-headline-sm text-headline-sm font-semibold text-inverse-on-surface">Next Weight Compilation: v4.2.2 Release Candidate</span>
+<span class="px-2 py-0.2 bg-[#065F46] text-[#ECFDF5] rounded text-[10px] font-data-mono-sm border border-[#6EE7B7]">VALIDATED</span>
+</div>
+<p class="font-body-sm text-body-sm text-inverse-primary mt-0.5 max-w-3xl">
+              1,482 auditor feedback tensors compiled. Model weights are ready for statutory deployment across the ERP ingest gateway. All regressions against Q1/Q2 baselines passed with zero compliance violations.
+            </p>
+</div>
+</div>
+<div class="flex items-center gap-2 shrink-0">
+<button class="h-8 px-3 bg-inverse-surface text-inverse-on-surface border border-outline rounded font-label-sm text-label-sm hover:bg-on-surface-variant transition-colors active:scale-[0.98]">
+            Simulate Shadow Run
+          </button>
+<button class="h-8 px-3.5 bg-secondary text-on-secondary rounded font-label-sm text-label-sm hover:bg-secondary-container transition-colors flex items-center gap-1.5 shadow active:scale-[0.98]">
+<span class="material-symbols-outlined text-sm" data-icon="rocket_launch">rocket_launch</span>
+            Deploy to Production Gateway
+          </button>
+</div>
+</section>
+</main>
+</div>
+</body></html>

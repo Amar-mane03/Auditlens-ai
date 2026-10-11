@@ -1,0 +1,9 @@
+transaction_id,invoice_number,invoice_date,posting_date,customer_id,customer_name,product_id,product_name,quantity,unit_price,gross_amount,discount_amount,tax_amount,net_amount,credit_note_number,transaction_type,gl_account,currency,contract_price,expected_quantity,related_party_indicator
+T-1,INV-100,2024-01-05,2024-01-07,CUST-1,Acme,SKU-1,Widget,10,100,1000,0,0,1000,,INVOICE,4100,USD,120,10,N
+T-2,INV-100,2024-01-05,2024-01-07,CUST-1,Acme,SKU-1,Widget,10,100,1000,0,0,1000,,INVOICE,4100,USD,120,10,N
+T-3,INV-101,2024-02-20,2024-02-21,CUST-2,Northwind,SKU-2,Gadget,8,100,800,0,0,800,,INVOICE,4100,USD,120,10,N
+T-4,INV-102,2024-03-10,2024-03-12,CUST-3,SalesCo,SKU-3,Service,5,120,600,180,0,420,CR-200,INVOICE,4100,USD,100,5,N
+T-5,INV-103,2024-03-15,2024-03-18,CUST-4,Alpha,SKU-4,Widget,7,100,700,0,0,700,,INVOICE,4100,USD,100,7,N
+T-6,INV-104,2024-05-02,2024-05-03,CUST-5,Beta,SKU-5,Widget,2,100,200,0,0,200,,INVOICE,4100,USD,100,2,N
+T-7,CN-900,2024-05-05,2024-05-06,CUST-5,Beta,SKU-5,Widget,1,50,50,0,0,50,CN-900,CREDIT_NOTE,4200,USD,,,
+T-8,INV-105,2024-06-01,2024-06-03,CUST-6,Gamma,SKU-6,Widget,12,100,1200,0,0,1200,,INVOICE,4100,USD,150,12,N

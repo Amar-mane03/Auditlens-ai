@@ -1,0 +1,15 @@
+pandas
+numpy
+openpyxl
+xlrd
+scikit-learn
+matplotlib
+seaborn
+flask
+fastapi
+uvicorn
+python-dotenv
+cloudinary
+requests
+pillow
+PyPDF2
